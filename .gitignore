@@ -1,0 +1,35 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editores
+.vscode/
+.idea/
+
+# --- Entorno y datos descargados (NO se suben) ---
+# Todo lo que los cuadernos clonan/descargan de GitHub, Drive, Kaggle, etc.
+.cache/
+**/.cache/
+# Repos clonados por los cuadernos (enlazados desde .cache/)
+curso_IA_CHEC
+# Artefactos de ejecución
+*.log
+logs.txt
+cloudflared*.log
+runs/
+wandb/
+*.pt
+*.h5
+*.keras
