@@ -111,15 +111,71 @@ en algunas versiones altera resultados numéricos:
 pip install tensorflow-metal
 ```
 
-## Limitaciones conocidas fuera de Colab
+## Estado de ejecución
 
-| Cuaderno | Limitación |
-|----------|------------|
-| `Clase 2/Conglomerados y Reduccion de Dimenciones Práctica.ipynb`, `Práctica_Conglomerados-Reducción.ipynb` | Usan `cuml` (RAPIDS de NVIDIA): solo Linux con GPU CUDA. En macOS no hay equivalente instalable. |
-| `Clase 4/2_Detección_de_Objetos.ipynb` | Requiere claves de API de Roboflow y Weights & Biases. El dispositivo ya se elige solo (CUDA/MPS/CPU). |
-| `Clase 4/Agentes_Inteligentes.ipynb`, `Clase 4/Untitled0.ipynb` | Requieren `OPENAI_API_KEY`. |
-| `Clase 1/Práctica - procesamiento de datos.ipynb`, `Práctica_Conglomerados-Reducción.ipynb` | Requieren credenciales de Kaggle (`~/.kaggle/kaggle.json`). |
-| Celdas de `streamlit` + `cloudflared` | Son túneles propios de Colab. Quedan condicionadas a Colab; en local se ejecuta la app con `streamlit run <archivo>.py`. |
+Resultado del barrido con `scripts/run_notebooks.py` sobre macOS (Apple Silicon,
+CPU/MPS). Los cuadernos que fallan lo hacen por razones concretas, no por el
+entorno.
+
+### Pasan sin errores (10 de 19)
+
+`Clase 1/Procesamiento de datos` · `Clase 1/Práctica - procesamiento de datos` ·
+`Clase 2/Clasificación` · `Clase 2/Regresion` · `Clase 3/Práctica_ANN` ·
+`Clase 4/Series` · `Clase 4/rl_dummy_colab` · `Copia de Clasificación` ·
+`Copia de Regresion` · `Copia de Streamlit`
+
+> Con 8 GB de RAM conviene ejecutarlos por tandas. Los cuadernos con TensorFlow
+> no liberan memoria entre kernels y el sistema empieza a paginar: uno que tarda
+> 15 s aislado puede tardar 10 min o morir si corre después de varios otros.
+
+### No pueden pasar sin interacción humana (3)
+
+| Cuaderno | Celda | Causa |
+|----------|-------|-------|
+| `Clase 2/Conglomerados` | 20 | `self.kmeans` se asigna solo dentro del callback de un widget |
+| `Clase 2/Reduccion Dimension` | 8 | `visualizer.X` se asigna solo dentro del callback de un widget |
+| `Clase 3/Aprendizaje_profundo` | 39 | `history` se asigna solo al pulsar el botón de entrenamiento |
+
+Son **interactivos por diseño**: la clase inicializa el atributo en `None` y solo
+lo llena cuando alguien mueve un control. Ninguna librería arregla esto; en una
+clase en vivo funcionan bien.
+
+### Requieren GPU NVIDIA (2)
+
+`Clase 2/Conglomerados y Reduccion de Dimenciones Práctica` y
+`Práctica_Conglomerados-Reducción` importan `cuml` (RAPIDS), que solo existe para
+Linux con CUDA. No hay equivalente en macOS.
+
+### Requieren credenciales (3)
+
+| Cuaderno | Falta |
+|----------|-------|
+| `Clase 4/2_Detección_de_Objetos` | `ROBOFLOW_API_KEY` (y `WANDB_API_KEY`) |
+| `Clase 4/Agentes_Inteligentes` | `OPENAI_API_KEY` |
+| `Clase 4/Untitled0` | `OPENAI_API_KEY` |
+
+La lógica de estos cuadernos está verificada: ejecutados con una clave ficticia
+llegan hasta la llamada a la API y fallan con un `401`, que es lo esperado.
+Comprobalo con `python scripts/check_logica_agentes.py`.
+
+En `2_Detección_de_Objetos` el dispositivo ya se elige solo. En Apple Silicon
+selecciona MPS, pero el **entrenamiento** de YOLO sobre Metal choca con un error
+conocido de PyTorch; la inferencia sí funciona. Para entrenar, usá CUDA o forzá
+`device="cpu"`.
+
+### Con un defecto de contenido (1)
+
+`Clase 2/Búsqueda de hiperparámetros`, celda 25: aplica `QuadraticDiscriminantAnalysis`
+sobre MNIST reducido a 200 muestras. Con 10 clases y 784 características quedan
+~16 muestras por clase, y la matriz de covarianza no alcanza rango completo.
+scikit-learn ≥ 1.6 lanza `LinAlgError`; las versiones anteriores solo advertían.
+Fijar scikit-learn a una versión vieja no es opción porque `umap-learn` exige ≥ 1.6.
+
+Sale de tres formas, y es una decisión pedagógica:
+
+1. subir `sample_size` a ~15 000 para que haya más muestras por clase que características;
+2. reducir dimensión (PCA) antes del QDA;
+3. quitar el QDA de esa sección.
 
 ## Scripts
 
