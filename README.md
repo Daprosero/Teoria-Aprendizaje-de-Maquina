@@ -2,6 +2,8 @@
 
 Material del curso: notebooks, prácticas y presentaciones.
 
+**Diapositivas del curso: https://daprosero.github.io/Teoria-Aprendizaje-de-Maquina/**
+
 ## Estructura
 
 ```

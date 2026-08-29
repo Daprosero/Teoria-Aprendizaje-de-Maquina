@@ -1,5 +1,25 @@
 # Posgrado — Teoría de Aprendizaje de Máquina
 
+## 📊 Diapositivas del curso
+
+**https://daprosero.github.io/Teoria-Aprendizaje-de-Maquina/**
+
+Seis módulos con la teoría y los ejemplos de estas clases:
+
+| Módulo | Contenido |
+|--------|-----------|
+| 1. Datos: de crudos a utilizables | `.info()` y `.describe()` como diagnóstico, mecanismos de datos faltantes, las cinco estrategias de imputación, fuga de información y escalado |
+| 2. Gráficas y estadística descriptiva | Histograma, boxplot, violín, dispersión, barras, ECDF y matriz de correlación: qué pregunta responde cada uno y cómo se interpreta |
+| 3. Regresión | Dependencia estadística, los tres enfoques de estimación, diagnóstico por residuos, sesgo-varianza, Ridge/Lasso/ElasticNet, métricas y validación cruzada |
+| 4. Clasificación | Fronteras de decisión, k-vecinos, árboles, bosques aleatorios, SVM, matriz de confusión y elección del umbral |
+| 5. Conglomerados | K-means y su supuesto oculto, elección de k, DBSCAN, espectral y validación de grupos |
+| 6. Reducción de dimensión | Maldición de la dimensión, PCA, varianza explicada, kernel PCA, t-SNE y UMAP |
+
+El orden es supervisado antes que no supervisado: PCA y UMAP llegan cuando ya se
+sabe qué es entrenar y medir error.
+
+---
+
 Cuadernos de las clases 1 a 4. Están escritos para Google Colab, pero también
 se ejecutan en local con el entorno que se describe abajo.
 
