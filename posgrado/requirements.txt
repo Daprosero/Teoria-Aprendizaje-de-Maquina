@@ -1,0 +1,90 @@
+# =============================================================================
+# Teoría de Aprendizaje de Máquina — Posgrado
+# Dependencias de todas las clases (1 a 4).
+# Python 3.11 recomendado.
+#   python3.11 -m venv .venv && source .venv/bin/activate
+#   pip install -r requirements.txt
+# =============================================================================
+
+# --- Núcleo científico -------------------------------------------------------
+numpy>=1.26,<2.1
+pandas>=2.1,<3.0            # pandas 3 cambia fillna/inplace con copy-on-write
+scipy>=1.11
+matplotlib>=3.8
+seaborn>=0.13
+joblib>=1.3
+statsmodels>=0.14
+
+# --- Aprendizaje de máquina --------------------------------------------------
+scikit-learn>=1.4
+tensorflow>=2.16          # Clases 2, 3 y 4 (Keras 3)
+
+# --- Jupyter / notebooks -----------------------------------------------------
+jupyterlab>=4.0
+notebook>=7.0
+ipykernel>=6.29
+ipywidgets>=8.1
+nbconvert>=7.16
+nbclient>=0.10
+
+# --- Visualización interactiva ----------------------------------------------
+plotly>=5.20
+bokeh>=3.4                # Clase 2 (gráficos UMAP)
+holoviews>=1.18           # Clase 2 (gráficos UMAP)
+datashader>=0.16          # Clase 2 (gráficos UMAP)
+
+# --- Geoespacial (Clase 1) ---------------------------------------------------
+folium>=0.16
+geopandas>=0.14
+shapely>=2.0
+
+# --- Reducción de dimensión y conglomerados (Clase 2) ------------------------
+umap-learn>=0.5
+openTSNE>=1.0
+
+# --- Visión por computador (Clase 2 y 4) -------------------------------------
+opencv-python>=4.9
+
+# --- Series de tiempo (Clase 4) ----------------------------------------------
+# statsmodels ya está declarado arriba
+
+# --- Aprendizaje por refuerzo (Clase 4) --------------------------------------
+gymnasium[toy-text]>=0.29,<1.0     # Taxi-v3 fue eliminado en gymnasium 1.x
+
+# --- Detección de objetos (Clase 4) ------------------------------------------
+ultralytics>=8.2          # YOLO — arrastra torch/torchvision
+roboflow>=1.1             # requiere API key
+wandb>=0.17               # requiere API key
+PyYAML>=6.0
+requests>=2.31
+
+# --- Agentes / LLM (Clase 4) -------------------------------------------------
+langchain>=0.2
+langchain-community>=0.2
+langchain-experimental>=0.0.60
+langchain-openai>=0.1     # requiere OPENAI_API_KEY
+httpx>=0.27,<0.28         # pin heredado de los cuadernos de Clase 4
+tabulate>=0.9             # usado por los agentes de pandas
+
+# --- Aplicaciones web (Clase 1 y 4) ------------------------------------------
+streamlit>=1.35
+
+# --- Descarga de datos -------------------------------------------------------
+gdown>=5.1
+kagglehub>=0.3            # requiere credenciales de Kaggle
+openpyxl>=3.1             # lectura de .xlsx (Clase 4 — Series)
+xlrd>=2.0                 # lectura de .xls
+
+# --- Paquetes desde GitHub ---------------------------------------------------
+# Biplot local del grupo GCPDS (Clase 2 — Reducción de Dimensión)
+gcpds.localbiplot @ git+https://github.com/UN-GCPDS/python-gcpds.localbiplot.git
+
+# =============================================================================
+# NO INSTALABLE EN macOS / CPU
+# =============================================================================
+# cuml  -> RAPIDS de NVIDIA. Solo Linux + GPU CUDA. Lo usan:
+#            - Clase 2/Conglomerados y Reduccion de Dimenciones Práctica.ipynb
+#            - Práctica_Conglomerados-Reducción.ipynb
+#          En esos cuadernos hay equivalente en scikit-learn / umap-learn.
+#          Instalación en Linux+CUDA:
+#            pip install --extra-index-url=https://pypi.nvidia.com cuml-cu12
