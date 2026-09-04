@@ -247,7 +247,7 @@ body {
   min-width: 0;
   padding: clamp(10px, 1.6vw, 18px);
   display: grid;
-  grid-template-columns: minmax(280px, 36%) minmax(0, 1fr);
+  grid-template-columns: minmax(260px, 32%) minmax(0, 1fr);
   gap: clamp(10px, 1.4vw, 16px);
   align-items: stretch;
   opacity: 0;
@@ -833,4 +833,186 @@ body.focus-mode .rail {
     animation: none;
     transition: none;
   }
+}
+
+/* Bloques de modelo: matematica, analogia y estimador de scikit-learn.
+   Cada slide de modelo repite la misma anatomia para que el alumno sepa
+   siempre donde mirar. */
+.slide-block {
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line-strong);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: var(--gray0);
+}
+
+.slide-block + .slide-block {
+  margin-top: 8px;
+}
+
+.slide-block-label {
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--subtext);
+}
+
+.slide-block p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.slide-block p + p {
+  margin-top: 6px;
+}
+
+.slide-block strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.block-math {
+  border-left-color: #4e93b0;
+}
+
+.block-analogy {
+  border-left-color: #a8781a;
+}
+
+.block-sklearn {
+  border-left-color: #4f6b23;
+}
+
+.block-sklearn code,
+.slide-list code,
+.slide-block code {
+  font-family: ui-monospace, "SFMono-Regular", "Menlo", monospace;
+  font-size: 0.88em;
+  background: var(--surface-2);
+  border-radius: 5px;
+  padding: 1px 5px;
+}
+
+/* KaTeX hereda el cuerpo del slide en vez de imponer su propio tamano. */
+.slide-block .katex {
+  font-size: 1.02em;
+}
+
+.slide-block .katex-display {
+  margin: 0.35em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 2px;
+}
+
+/* Slides de modelo: la figura y los bloques comparten la columna derecha, para
+   que la matematica quede al lado del dibujo que explica y la columna de texto
+   no tenga que scrollear. */
+.slide-stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1vw, 12px);
+  min-height: 0;
+  min-width: 0;
+}
+
+.slide-stack .slide-figure {
+  flex: 1 1 0;
+  min-height: 180px;
+}
+
+.slide-blocks {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.slide-blocks > .slide-block {
+  margin-top: 0;
+}
+
+/* La matematica ocupa el ancho completo: las formulas en display no entran en
+   media columna. Si solo hay dos bloques, el segundo tambien se expande. */
+.slide-blocks > .block-math,
+.slide-blocks > .slide-block:nth-child(2):last-child {
+  grid-column: 1 / -1;
+}
+
+/* Dentro de la pila, los bloques van mas compactos: comparten alto con la
+   figura y ya no necesitan el respiro de una columna propia. */
+.slide-blocks {
+  gap: 6px;
+}
+
+.slide-blocks > .slide-block {
+  padding: 7px 10px;
+  border-radius: 10px;
+}
+
+.slide-blocks .slide-block-label {
+  margin-bottom: 4px;
+  font-size: 0.62rem;
+}
+
+.slide-blocks .slide-block p {
+  font-size: 0.86rem;
+  line-height: 1.42;
+}
+
+.slide-blocks .slide-block p + p {
+  margin-top: 4px;
+}
+
+.slide-blocks .katex {
+  font-size: 0.95em;
+}
+
+.slide-blocks .katex-display {
+  margin: 0.2em 0;
+}
+
+/* Los slides de modelo cargan viñetas, analogía, matemática y estimador: la
+   escala tipográfica se ajusta solo en ellos para que todo entre sin scroll a
+   1080p, que es la resolución de proyección. */
+.slide[data-layout="stack"] h2 {
+  font-size: clamp(1.35rem, 1.85vw, 1.92rem);
+  margin-bottom: 10px;
+}
+
+.slide[data-layout="stack"] .slide-list {
+  font-size: 0.95rem;
+  line-height: 1.44;
+}
+
+.slide[data-layout="stack"] .slide-list li {
+  margin-bottom: 0.42em;
+}
+
+.slide[data-layout="stack"] .slide-content .slide-block {
+  margin-top: 10px;
+  padding: 8px 10px;
+}
+
+.slide[data-layout="stack"] .slide-content .slide-block p {
+  font-size: 0.88rem;
+  line-height: 1.44;
+}
+
+.slide-blocks .slide-block p {
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.slide-blocks .katex {
+  font-size: 0.9em;
 }

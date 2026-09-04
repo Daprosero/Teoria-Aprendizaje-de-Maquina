@@ -4,19 +4,24 @@
 
 **https://daprosero.github.io/Teoria-Aprendizaje-de-Maquina/**
 
-Seis módulos con la teoría y los ejemplos de estas clases:
+Seis módulos, 62 diapositivas, con la teoría y los ejemplos de estas clases:
 
 | Módulo | Contenido |
 |--------|-----------|
 | 1. Datos: de crudos a utilizables | `.info()` y `.describe()` como diagnóstico, mecanismos de datos faltantes, las cinco estrategias de imputación, fuga de información y escalado |
 | 2. Gráficas y estadística descriptiva | Histograma, boxplot, violín, dispersión, barras, ECDF y matriz de correlación: qué pregunta responde cada uno y cómo se interpreta |
-| 3. Regresión | Dependencia estadística, los tres enfoques de estimación, diagnóstico por residuos, sesgo-varianza, Ridge/Lasso/ElasticNet, métricas y validación cruzada |
-| 4. Clasificación | Fronteras de decisión, k-vecinos, árboles, bosques aleatorios, SVM, matriz de confusión y elección del umbral |
-| 5. Conglomerados | K-means y su supuesto oculto, elección de k, DBSCAN, espectral y validación de grupos |
-| 6. Reducción de dimensión | Maldición de la dimensión, PCA, varianza explicada, kernel PCA, t-SNE y UMAP |
+| 3. Reducción de dimensión | Maldición de la dimensión, PCA, cuántas componentes conservar, kernel PCA, t-SNE y UMAP |
+| 4. Conglomerados | Aprender sin etiquetas, K-means y su supuesto oculto, cómo elegir k, DBSCAN, espectral y Mini-Batch, validación de grupos |
+| 5. Regresión | Esperanza condicional, mínimos cuadrados, sesgo-varianza, Ridge/Lasso/ElasticNet, árboles y KNN, el truco del kernel, SVR, Kernel Ridge, procesos gaussianos, métricas y validación cruzada |
+| 6. Probabilidad y clasificación | Probabilidad condicional y Bayes, regresión logística, Naive Bayes, k-vecinos, árboles, bosques, boosting, SVM, matriz de confusión y umbral por costo |
 
-El orden es supervisado antes que no supervisado: PCA y UMAP llegan cuando ya se
-sabe qué es entrenar y medir error.
+El orden va de lo no supervisado a lo supervisado, para que la matemática se
+cobre dos veces: la inercia que minimiza K-means es la misma que minimiza un
+árbol de regresión, y el kernel de PCA es el de SVR y los procesos gaussianos.
+
+Cada modelo se presenta con tres bloques fijos —la matemática, una analogía y su
+estimador de scikit-learn— y la probabilidad se explica sobre un ejemplo de dos
+cajas con bolitas verdes y rojas que después sostiene toda la evaluación.
 
 ---
 

@@ -199,3 +199,22 @@ window.addEventListener("touchend", (event) => {
 buildDots();
 const saved = Number(localStorage.getItem("deck-tam-v1")) || 0;
 render(Math.min(saved, slides.length - 1), { animate: false });
+
+// KaTeX renders every formula once the deferred bundle is ready. Slides are all
+// in the DOM from the start, so a single pass over the deck is enough.
+function renderMath() {
+  if (typeof renderMathInElement !== "function") return;
+  renderMathInElement(document.getElementById("viewport"), {
+    delimiters: [
+      { left: "\\[", right: "\\]", display: true },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false
+  });
+}
+
+if (document.readyState === "complete") {
+  renderMath();
+} else {
+  window.addEventListener("load", renderMath);
+}
