@@ -8,6 +8,8 @@ const deckApp = document.querySelector(".deck-app");
 const modeBadge = document.getElementById("mode-badge");
 
 let current = 0;
+// Each deck keeps its own last position.
+const storageKey = document.body.dataset.deckKey || "deck-tam-v1";
 let cleanupTimer = null;
 let lastModule = null;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -109,7 +111,7 @@ function render(index, options = {}) {
 
   const previous = current;
   current = next;
-  try { localStorage.setItem("deck-tam-v1", current); } catch (_) {}
+  try { localStorage.setItem(storageKey, current); } catch (_) {}
 
   // Una pulsacion nueva cancela la transicion en curso en vez de descartarse.
   if (cleanupTimer) {
@@ -197,7 +199,7 @@ window.addEventListener("touchend", (event) => {
 });
 
 buildDots();
-const saved = Number(localStorage.getItem("deck-tam-v1")) || 0;
+const saved = Number(localStorage.getItem(storageKey)) || 0;
 render(Math.min(saved, slides.length - 1), { animate: false });
 
 // KaTeX renders every formula once the deferred bundle is ready. Slides are all

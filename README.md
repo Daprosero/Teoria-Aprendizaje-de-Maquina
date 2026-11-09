@@ -2,7 +2,10 @@
 
 Material del curso: notebooks, prácticas y presentaciones.
 
-**Diapositivas del curso: https://daprosero.github.io/Teoria-Aprendizaje-de-Maquina/**
+**Diapositivas del curso:**
+
+- Posgrado: https://daprosero.github.io/Teoria-Aprendizaje-de-Maquina/
+- Pregrado: https://daprosero.github.io/Teoria-Aprendizaje-de-Maquina/pregrado/
 
 ## Estructura
 
@@ -25,7 +28,9 @@ En la raíz de `posgrado/` están además la introducción a ciencia de datos e 
 
 ### pregrado
 
-Pendiente de organizar.
+Las diapositivas están en [`docs/pregrado/`](docs/pregrado/index.html): datos, reducción de
+dimensión (PCA, Kernel PCA, t-SNE, UMAP), conglomerados, panorama de regresión y
+clasificación con scikit-learn, redes neuronales y redes convolucionales.
 
 ## Uso
 
