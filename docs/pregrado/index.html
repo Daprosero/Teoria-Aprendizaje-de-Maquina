@@ -14,6 +14,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="dense-layer.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
@@ -37,39 +38,33 @@
     <div class="ambient"></div>
     <div class="deck-app">
       <nav class="rail" aria-label="Modulos">
-        <div class="rail-module" data-module="1">
-          <button class="rail-title" data-first="1">
-            1. Datos: de crudos a utilizables
-          </button>
-          <div class="rail-dots" id="dots-1"></div>
-        </div>
         <div class="rail-module" data-module="2">
-          <button class="rail-title" data-first="9">
-            2. Reducción de dimensión
+          <button class="rail-title" data-first="1">
+            1. Reducción de dimensión
           </button>
           <div class="rail-dots" id="dots-2"></div>
         </div>
         <div class="rail-module" data-module="3">
-          <button class="rail-title" data-first="15">
-            3. Conglomerados
+          <button class="rail-title" data-first="7">
+            2. Conglomerados
           </button>
           <div class="rail-dots" id="dots-3"></div>
         </div>
         <div class="rail-module" data-module="4">
-          <button class="rail-title" data-first="21">
-            4. scikit-learn: regresión y clasificación
+          <button class="rail-title" data-first="13">
+            3. scikit-learn: regresión y clasificación
           </button>
           <div class="rail-dots" id="dots-4"></div>
         </div>
         <div class="rail-module" data-module="5">
-          <button class="rail-title" data-first="24">
-            5. Redes neuronales
+          <button class="rail-title" data-first="16">
+            4. Redes neuronales
           </button>
           <div class="rail-dots" id="dots-5"></div>
         </div>
         <div class="rail-module" data-module="6">
-          <button class="rail-title" data-first="44">
-            6. Redes convolucionales
+          <button class="rail-title" data-first="36">
+            5. Redes convolucionales
           </button>
           <div class="rail-dots" id="dots-6"></div>
         </div>
@@ -99,712 +94,6 @@
                 <span class="cover-year">2026</span>
               </p>
             </div>
-          </article>
-          <article class="slide" data-index="1" data-module="1" data-tone="blue">
-            <div class="slide-content">
-              <p class="slide-kicker">1 · Datos</p>
-              <h2>El modelo no arregla lo que el dato rompió</h2>
-              <ul class="slide-list">
-                <li>
-                  <strong>El orden de magnitud:</strong> en un proyecto real, la
-                  preparación de datos se lleva la mayor parte del tiempo. El
-                  ajuste del modelo es la parte corta.
-                </li>
-                <li>
-                  <strong>Ningún algoritmo compensa un sesgo de origen:</strong>
-                  si la muestra no representa al fenómeno, un modelo más potente
-                  solo aprende el sesgo con más precisión.
-                </li>
-                <li>
-                  <strong>Los errores se propagan hacia adelante:</strong> una
-                  unidad mal interpretada en la carga aparece después como un
-                  <em>outlier</em>, luego como un coeficiente absurdo y al final
-                  como una decisión equivocada.
-                </li>
-                <li>
-                  <strong>Por eso la secuencia es cargar, mirar, describir,
-                  corregir</strong> y solo entonces modelar. Saltarse el
-                  <em>mirar</em> es el error más caro y el más frecuente.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <svg
-                viewBox="0 0 520 360"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Cadena de trabajo con datos: cargar, explorar, describir, corregir y modelar, con el error propagandose desde el origen"
-              >
-                <rect width="520" height="360" fill="#F4F7FA" />
-                <text x="26" y="40" font-size="15" font-weight="700" fill="#1B2029">
-                  El costo de corregir crece hacia la derecha
-                </text>
-                <g font-size="12" fill="#454F61">
-                  <rect x="26" y="66" width="88" height="52" rx="10" fill="#FFFFFF" stroke="#4E93B0" stroke-width="2" />
-                  <text x="70" y="88" text-anchor="middle" font-weight="700" fill="#1B2029">Cargar</text>
-                  <text x="70" y="105" text-anchor="middle">read_csv</text>
-
-                  <rect x="134" y="66" width="88" height="52" rx="10" fill="#FFFFFF" stroke="#4E93B0" stroke-width="2" />
-                  <text x="178" y="88" text-anchor="middle" font-weight="700" fill="#1B2029">Explorar</text>
-                  <text x="178" y="105" text-anchor="middle">head / info</text>
-
-                  <rect x="242" y="66" width="88" height="52" rx="10" fill="#FFFFFF" stroke="#4E93B0" stroke-width="2" />
-                  <text x="286" y="88" text-anchor="middle" font-weight="700" fill="#1B2029">Describir</text>
-                  <text x="286" y="105" text-anchor="middle">describe</text>
-
-                  <rect x="350" y="66" width="88" height="52" rx="10" fill="#FFFFFF" stroke="#66862E" stroke-width="2" />
-                  <text x="394" y="88" text-anchor="middle" font-weight="700" fill="#1B2029">Corregir</text>
-                  <text x="394" y="105" text-anchor="middle">imputar</text>
-
-                  <rect x="242" y="150" width="196" height="46" rx="10" fill="#EDF1F7" stroke="#B8C2D0" stroke-width="2" />
-                  <text x="340" y="178" text-anchor="middle" font-weight="700" fill="#1B2029">Modelar</text>
-                </g>
-                <g stroke="#B8C2D0" stroke-width="2" marker-end="url(#f1-ar)">
-                  <path d="M114 92 L130 92" />
-                  <path d="M222 92 L238 92" />
-                  <path d="M330 92 L346 92" />
-                  <path d="M394 118 L394 146" />
-                </g>
-                <defs>
-                  <marker id="f1-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M0 0 L10 5 L0 10 z" fill="#B8C2D0" />
-                  </marker>
-                </defs>
-
-                <path d="M40 232 C 150 232, 300 300, 470 316" stroke="#C55A7B" stroke-width="3" fill="none" />
-                <text x="26" y="222" font-size="12" fill="#A83A59" font-weight="700">
-                  costo de corregir un error
-                </text>
-                <line x1="40" y1="330" x2="470" y2="330" stroke="#B8C2D0" stroke-width="2" />
-                <g font-size="11" fill="#5B6472" text-anchor="middle">
-                  <text x="70" y="348">carga</text>
-                  <text x="190" y="348">exploración</text>
-                  <text x="310" y="348">entrenamiento</text>
-                  <text x="440" y="348">producción</text>
-                </g>
-              </svg>
-            </figure>
-          </article>
-          <article class="slide" data-index="2" data-module="1" data-tone="blue">
-            <div class="slide-content">
-              <p class="slide-kicker">2 · Datos</p>
-              <h2><code>.info()</code> antes que <code>.head()</code></h2>
-              <ul class="slide-list">
-                <li>
-                  <strong><code>.head()</code> muestra, <code>.info()</code>
-                  diagnostica:</strong> las primeras cinco filas casi siempre se
-                  ven bien. El problema está en las que no mirás.
-                </li>
-                <li>
-                  <strong>Tres señales en una sola salida:</strong> cuántas filas
-                  hay, cuántos no nulos tiene cada columna y de qué tipo es cada
-                  una.
-                </li>
-                <li>
-                  <strong>La trampa del <code>object</code>:</strong> una columna
-                  numérica que aparece como <code>object</code> significa que hay
-                  texto adentro — una coma decimal, un <code>"N/D"</code>, un
-                  espacio. Pandas no puede promediarla.
-                </li>
-                <li>
-                  <strong>Faltantes explícitos vs disfrazados:</strong>
-                  <code>NaN</code> lo cuenta <code>.info()</code>. Un
-                  <code>-999</code>, un <code>0</code> imposible o un
-                  <code>"desconocido"</code> no: esos se ven con
-                  <code>.value_counts()</code>.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <svg
-                viewBox="0 0 520 360"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Salida de info() con una columna numerica leida como object y faltantes disfrazados"
-              >
-                <rect width="520" height="360" fill="#F4F7FA" />
-                <rect x="24" y="24" width="472" height="150" rx="12" fill="#FFFFFF" stroke="#B8C2D0" stroke-width="2" />
-                <text x="40" y="48" font-size="12" font-family="monospace" fill="#5B6472">
-                  RangeIndex: 20640 entries, 0 to 20639
-                </text>
-                <g font-size="12" font-family="monospace">
-                  <text x="40" y="76" fill="#454F61">consumo_kwh</text>
-                  <text x="230" y="76" fill="#454F61">20640 non-null</text>
-                  <text x="380" y="76" fill="#4E93B0">float64</text>
-
-                  <text x="40" y="100" fill="#454F61">estrato</text>
-                  <text x="230" y="100" fill="#A83A59">18132 non-null</text>
-                  <text x="380" y="100" fill="#4E93B0">float64</text>
-
-                  <text x="40" y="124" fill="#454F61">tension_v</text>
-                  <text x="230" y="124" fill="#454F61">20640 non-null</text>
-                  <text x="380" y="124" fill="#A83A59" font-weight="700">object</text>
-
-                  <text x="40" y="148" fill="#454F61">municipio</text>
-                  <text x="230" y="148" fill="#454F61">20640 non-null</text>
-                  <text x="380" y="148" fill="#4E93B0">object</text>
-                </g>
-
-                <path d="M424 96 L470 96 L470 130 L424 130" stroke="#A83A59" stroke-width="2" fill="none" />
-                <text x="300" y="204" font-size="12" font-weight="700" fill="#A83A59">
-                  dos alarmas en la misma pantalla
-                </text>
-
-                <rect x="24" y="220" width="230" height="116" rx="12" fill="#FFFFFF" stroke="#A83A59" stroke-width="2" />
-                <text x="40" y="244" font-size="13" font-weight="700" fill="#1B2029">2.508 faltantes</text>
-                <text x="40" y="266" font-size="12" fill="#5B6472">en «estrato»: el 12 % de</text>
-                <text x="40" y="284" font-size="12" fill="#5B6472">las filas. ¿Son al azar</text>
-                <text x="40" y="302" font-size="12" fill="#5B6472">o faltan justo en los</text>
-                <text x="40" y="320" font-size="12" fill="#5B6472">estratos altos?</text>
-
-                <rect x="266" y="220" width="230" height="116" rx="12" fill="#FFFFFF" stroke="#A83A59" stroke-width="2" />
-                <text x="282" y="244" font-size="13" font-weight="700" fill="#1B2029">«tension_v» es texto</text>
-                <text x="282" y="266" font-size="12" fill="#5B6472">Debería ser número. Hay</text>
-                <text x="282" y="284" font-size="12" fill="#5B6472">algo adentro: «110,5» con</text>
-                <text x="282" y="302" font-size="12" fill="#5B6472">coma, o un «N/D». No se</text>
-                <text x="282" y="320" font-size="12" fill="#5B6472">puede promediar.</text>
-              </svg>
-            </figure>
-          </article>
-          <article class="slide" data-index="3" data-module="1" data-tone="blue">
-            <div class="slide-content">
-              <p class="slide-kicker">3 · Datos</p>
-              <h2><code>.describe()</code>: dónde se esconden los errores</h2>
-              <ul class="slide-list">
-                <li>
-                  <strong>Mirá los extremos, no el promedio:</strong> el
-                  <code>min</code> y el <code>max</code> delatan lo imposible.
-                  Una edad de <code>-1</code>, un consumo de <code>0</code> en una
-                  vivienda habitada, una presión de <code>999</code>.
-                </li>
-                <li>
-                  <strong>Media contra mediana:</strong> si difieren mucho, la
-                  distribución está sesgada o hay valores extremos. En datos
-                  simétricos, ambas casi coinciden.
-                </li>
-                <li>
-                  <strong>El rango intercuartílico (Q3 − Q1)</strong> resume la
-                  dispersión sin dejarse arrastrar por un solo valor raro, cosa
-                  que a la desviación estándar sí le pasa.
-                </li>
-                <li>
-                  <strong>Ejemplo concreto:</strong> ingresos con media 4.2M y
-                  mediana 1.8M. No es un error: es una cola larga. Usar la media
-                  como «ingreso típico» describiría a casi nadie.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <svg
-                viewBox="0 0 520 360"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Distribucion sesgada a la derecha donde la media queda muy por encima de la mediana"
-              >
-                <rect width="520" height="360" fill="#F4F7FA" />
-                <text x="26" y="36" font-size="14" font-weight="700" fill="#1B2029">
-                  Ingresos mensuales · cola larga a la derecha
-                </text>
-
-                <g fill="#7FB4CA" opacity="0.85">
-                  <rect x="60" y="196" width="26" height="96" />
-                  <rect x="88" y="150" width="26" height="142" />
-                  <rect x="116" y="126" width="26" height="166" />
-                  <rect x="144" y="160" width="26" height="132" />
-                  <rect x="172" y="196" width="26" height="96" />
-                  <rect x="200" y="228" width="26" height="64" />
-                  <rect x="228" y="248" width="26" height="44" />
-                  <rect x="256" y="262" width="26" height="30" />
-                  <rect x="284" y="272" width="26" height="20" />
-                  <rect x="312" y="278" width="26" height="14" />
-                  <rect x="340" y="282" width="26" height="10" />
-                  <rect x="368" y="285" width="26" height="7" />
-                  <rect x="396" y="287" width="26" height="5" />
-                  <rect x="424" y="288" width="26" height="4" />
-                  <rect x="452" y="289" width="26" height="3" />
-                </g>
-                <line x1="50" y1="292" x2="490" y2="292" stroke="#454F61" stroke-width="2" />
-
-                <line x1="129" y1="100" x2="129" y2="300" stroke="#66862E" stroke-width="3" stroke-dasharray="7 5" />
-                <text x="129" y="92" font-size="12" font-weight="700" fill="#4F6B23" text-anchor="middle">mediana</text>
-                <text x="129" y="76" font-size="12" fill="#4F6B23" text-anchor="middle">1,8 M</text>
-
-                <line x1="253" y1="100" x2="253" y2="300" stroke="#C55A7B" stroke-width="3" stroke-dasharray="7 5" />
-                <text x="253" y="92" font-size="12" font-weight="700" fill="#A83A59" text-anchor="middle">media</text>
-                <text x="253" y="76" font-size="12" fill="#A83A59" text-anchor="middle">4,2 M</text>
-
-                <path d="M137 320 L245 320" stroke="#5B6472" stroke-width="2" marker-end="url(#f3-ar)" marker-start="url(#f3-ar2)" />
-                <text x="191" y="340" font-size="12" fill="#5B6472" text-anchor="middle">
-                  la cola arrastra la media
-                </text>
-                <defs>
-                  <marker id="f3-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M0 0 L10 5 L0 10 z" fill="#5B6472" />
-                  </marker>
-                  <marker id="f3-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M0 0 L10 5 L0 10 z" fill="#5B6472" />
-                  </marker>
-                </defs>
-              </svg>
-            </figure>
-          </article>
-          <article class="slide" data-index="4" data-module="1" data-tone="cyan">
-            <div class="slide-content">
-              <p class="slide-kicker">4 · Datos</p>
-              <h2>Por qué falta un dato importa más que cuántos faltan</h2>
-              <ul class="slide-list">
-                <li>
-                  <strong>Faltante completamente al azar (MCAR):</strong> el
-                  sensor se apagó por una falla eléctrica. Borrar esas filas
-                  pierde información, pero no introduce sesgo.
-                </li>
-                <li>
-                  <strong>Faltante al azar (MAR):</strong> la falta depende de
-                  <em>otra</em> variable observada — los medidores viejos fallan
-                  más, y sabés cuáles son viejos. Se puede imputar bien usando
-                  esa otra variable.
-                </li>
-                <li>
-                  <strong>Faltante no al azar (MNAR):</strong> la falta depende
-                  del valor que falta. Los que más ganan no declaran su ingreso.
-                  Cualquier imputación subestima sistemáticamente.
-                </li>
-                <li>
-                  <strong>La prueba práctica:</strong> compará las demás columnas
-                  entre las filas con y sin faltante. Si se parecen, es MCAR. Si
-                  difieren, tenés un patrón — y borrar sesga.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <svg
-                viewBox="0 0 520 360"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Tres mecanismos de datos faltantes: MCAR disperso, MAR agrupado por otra variable y MNAR concentrado en los valores altos"
-              >
-                <rect width="520" height="360" fill="#F4F7FA" />
-                <g font-size="13" font-weight="700" fill="#1B2029" text-anchor="middle">
-                  <text x="98" y="36">MCAR</text>
-                  <text x="260" y="36">MAR</text>
-                  <text x="422" y="36">MNAR</text>
-                </g>
-                <g font-size="11" fill="#5B6472" text-anchor="middle">
-                  <text x="98" y="54">al azar puro</text>
-                  <text x="260" y="54">depende de otra columna</text>
-                  <text x="422" y="54">depende del valor faltante</text>
-                </g>
-
-                <rect x="30" y="70" width="136" height="200" rx="10" fill="#FFFFFF" stroke="#B8C2D0" stroke-width="2" />
-                <rect x="192" y="70" width="136" height="200" rx="10" fill="#FFFFFF" stroke="#B8C2D0" stroke-width="2" />
-                <rect x="354" y="70" width="136" height="200" rx="10" fill="#FFFFFF" stroke="#B8C2D0" stroke-width="2" />
-
-                <g fill="#7FB4CA">
-                  <rect x="44" y="84" width="108" height="12" rx="3" />
-                  <rect x="44" y="112" width="108" height="12" rx="3" />
-                  <rect x="44" y="140" width="108" height="12" rx="3" />
-                  <rect x="44" y="168" width="108" height="12" rx="3" />
-                  <rect x="44" y="196" width="108" height="12" rx="3" />
-                  <rect x="44" y="224" width="108" height="12" rx="3" />
-                  <rect x="44" y="252" width="108" height="12" rx="3" />
-                </g>
-                <g fill="#C55A7B">
-                  <rect x="44" y="112" width="108" height="12" rx="3" />
-                  <rect x="44" y="196" width="108" height="12" rx="3" />
-                </g>
-
-                <g fill="#7FB4CA">
-                  <rect x="206" y="84" width="108" height="12" rx="3" />
-                  <rect x="206" y="112" width="108" height="12" rx="3" />
-                  <rect x="206" y="140" width="108" height="12" rx="3" />
-                  <rect x="206" y="168" width="108" height="12" rx="3" />
-                  <rect x="206" y="196" width="108" height="12" rx="3" />
-                  <rect x="206" y="224" width="108" height="12" rx="3" />
-                  <rect x="206" y="252" width="108" height="12" rx="3" />
-                </g>
-                <g fill="#C55A7B">
-                  <rect x="206" y="196" width="108" height="12" rx="3" />
-                  <rect x="206" y="224" width="108" height="12" rx="3" />
-                  <rect x="206" y="252" width="108" height="12" rx="3" />
-                </g>
-                <text x="332" y="240" font-size="10" fill="#A83A59" transform="rotate(90 332 240)">medidor viejo</text>
-
-                <g fill="#7FB4CA">
-                  <rect x="368" y="84" width="108" height="12" rx="3" />
-                  <rect x="368" y="112" width="108" height="12" rx="3" />
-                  <rect x="368" y="140" width="108" height="12" rx="3" />
-                  <rect x="368" y="168" width="108" height="12" rx="3" />
-                  <rect x="368" y="196" width="108" height="12" rx="3" />
-                  <rect x="368" y="224" width="108" height="12" rx="3" />
-                  <rect x="368" y="252" width="108" height="12" rx="3" />
-                </g>
-                <g fill="#C55A7B">
-                  <rect x="368" y="84" width="108" height="12" rx="3" />
-                  <rect x="368" y="112" width="108" height="12" rx="3" />
-                </g>
-                <text x="360" y="104" font-size="10" fill="#A83A59" text-anchor="end" transform="rotate(-90 360 104)">ingresos altos</text>
-
-                <g font-size="12" text-anchor="middle">
-                  <text x="98" y="296" fill="#4F6B23" font-weight="700">borrar es seguro</text>
-                  <text x="260" y="296" fill="#A8781A" font-weight="700">imputar con contexto</text>
-                  <text x="422" y="296" fill="#A83A59" font-weight="700">todo estimador sesga</text>
-                </g>
-                <g font-size="11" fill="#5B6472" text-anchor="middle">
-                  <text x="98" y="316">pierde datos, no verdad</text>
-                  <text x="260" y="316">KNN o iterativo</text>
-                  <text x="422" y="316">hay que modelar la falta</text>
-                </g>
-              </svg>
-            </figure>
-          </article>
-          <article class="slide" data-index="5" data-module="1" data-tone="cyan">
-            <div class="slide-content">
-              <p class="slide-kicker">5 · Datos</p>
-              <h2>Las cinco estrategias de imputación</h2>
-              <ul class="slide-list">
-                <li>
-                  <strong>1. Eliminar filas o columnas</strong> —
-                  <code>dropna()</code>. Honesto y sin invención. Solo si los
-                  faltantes son pocos y MCAR; con 30 % de faltantes te quedás sin
-                  datos.
-                </li>
-                <li>
-                  <strong>2. Constante</strong> —
-                  <code>fillna(0)</code>. Peligroso: el 0 entra al promedio como
-                  si fuera una medición real. Sirve cuando el 0 <em>significa</em>
-                  algo (cero consumo real).
-                </li>
-                <li>
-                  <strong>3. Media o mediana</strong> —
-                  <code>SimpleImputer</code>. Mediana si hay valores extremos.
-                  Reduce artificialmente la varianza: todos los imputados quedan
-                  idénticos.
-                </li>
-                <li>
-                  <strong>4. Moda</strong> —
-                  <code>strategy='most_frequent'</code>. La opción para
-                  categóricas. Refuerza la categoría dominante.
-                </li>
-                <li>
-                  <strong>5. Modelo</strong> —
-                  <code>KNNImputer</code>, <code>IterativeImputer</code>. Usa las
-                  otras columnas para estimar. Más fiel, más caro, y puede filtrar
-                  información del conjunto de prueba si lo hacés mal.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <svg
-                viewBox="0 0 520 360"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Efecto de imputar por la media sobre la distribucion: aparece un pico artificial en el centro"
-              >
-                <rect width="520" height="360" fill="#F4F7FA" />
-                <text x="26" y="34" font-size="14" font-weight="700" fill="#1B2029">
-                  Imputar por la media deja una huella visible
-                </text>
-
-                <text x="26" y="62" font-size="12" font-weight="700" fill="#5B6472">antes</text>
-                <g fill="#B8C2D0">
-                  <rect x="40" y="118" width="22" height="40" />
-                  <rect x="64" y="98" width="22" height="60" />
-                  <rect x="88" y="82" width="22" height="76" />
-                  <rect x="112" y="76" width="22" height="82" />
-                  <rect x="136" y="86" width="22" height="72" />
-                  <rect x="160" y="102" width="22" height="56" />
-                  <rect x="184" y="124" width="22" height="34" />
-                  <rect x="208" y="140" width="22" height="18" />
-                </g>
-                <line x1="34" y1="158" x2="240" y2="158" stroke="#454F61" stroke-width="2" />
-
-                <text x="290" y="62" font-size="12" font-weight="700" fill="#A83A59">
-                  después de fillna(media)
-                </text>
-                <g fill="#B8C2D0">
-                  <rect x="290" y="118" width="22" height="40" />
-                  <rect x="314" y="98" width="22" height="60" />
-                  <rect x="338" y="82" width="22" height="76" />
-                  <rect x="386" y="86" width="22" height="72" />
-                  <rect x="410" y="102" width="22" height="56" />
-                  <rect x="434" y="124" width="22" height="34" />
-                  <rect x="458" y="140" width="22" height="18" />
-                </g>
-                <rect x="362" y="30" width="22" height="128" fill="#C55A7B" />
-                <line x1="284" y1="158" x2="490" y2="158" stroke="#454F61" stroke-width="2" />
-                <text x="373" y="22" font-size="11" fill="#A83A59" text-anchor="middle" font-weight="700">pico artificial</text>
-
-                <rect x="26" y="192" width="464" height="146" rx="12" fill="#FFFFFF" stroke="#B8C2D0" stroke-width="2" />
-                <text x="44" y="218" font-size="13" font-weight="700" fill="#1B2029">
-                  Qué se rompe al imputar por la media
-                </text>
-                <g font-size="12" fill="#454F61">
-                  <text x="44" y="244">· La varianza baja: los valores imputados no varían entre sí.</text>
-                  <text x="44" y="268">· La correlación con otras variables se diluye hacia cero.</text>
-                  <text x="44" y="292">· Los intervalos de confianza salen más angostos de lo real.</text>
-                  <text x="44" y="316">· El modelo parece más seguro de lo que en verdad está.</text>
-                </g>
-              </svg>
-            </figure>
-          </article>
-          <article class="slide" data-index="6" data-module="1" data-tone="green">
-            <div class="slide-content">
-              <p class="slide-kicker">6 · Datos</p>
-              <h2>Imputar dentro del pipeline, nunca antes de partir</h2>
-              <ul class="slide-list">
-                <li>
-                  <strong>La fuga de información (<em>data leakage</em>):</strong>
-                  si calculás la media sobre todo el conjunto y después partís en
-                  entrenamiento y prueba, la media ya vio los datos de prueba.
-                </li>
-                <li>
-                  <strong>El síntoma:</strong> el modelo rinde espectacular en
-                  validación y mediocre en producción. La diferencia no se explica
-                  por el modelo: se explica por la fuga.
-                </li>
-                <li>
-                  <strong>La regla:</strong> partir primero, después
-                  <code>fit</code> del imputador <em>solo</em> con entrenamiento, y
-                  <code>transform</code> sobre prueba con esos mismos parámetros.
-                </li>
-                <li>
-                  <strong>La forma de garantizarlo:</strong> meter el imputador
-                  dentro de un <code>Pipeline</code> de scikit-learn. Así la
-                  validación cruzada lo reajusta en cada pliegue y la fuga se
-                  vuelve imposible por construcción.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <svg
-                viewBox="0 0 520 360"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Comparacion entre imputar antes de partir, que filtra informacion, e imputar dentro del pipeline"
-              >
-                <rect width="520" height="360" fill="#F4F7FA" />
-
-                <text x="26" y="34" font-size="13" font-weight="700" fill="#A83A59">
-                  MAL · la media ve todo el conjunto
-                </text>
-                <rect x="26" y="48" width="200" height="42" rx="9" fill="#FFFFFF" stroke="#C55A7B" stroke-width="2" />
-                <text x="126" y="74" font-size="12" text-anchor="middle" fill="#1B2029" font-weight="700">imputar (todo)</text>
-                <path d="M126 90 L126 112" stroke="#C55A7B" stroke-width="2" marker-end="url(#f6-r)" />
-                <rect x="26" y="114" width="96" height="38" rx="9" fill="#EDF1F7" stroke="#B8C2D0" stroke-width="2" />
-                <text x="74" y="138" font-size="12" text-anchor="middle" fill="#454F61">entrenar</text>
-                <rect x="130" y="114" width="96" height="38" rx="9" fill="#EDF1F7" stroke="#B8C2D0" stroke-width="2" />
-                <text x="178" y="138" font-size="12" text-anchor="middle" fill="#454F61">probar</text>
-                <text x="126" y="176" font-size="11" text-anchor="middle" fill="#A83A59" font-weight="700">
-                  la prueba ya influyó
-                </text>
-
-                <text x="292" y="34" font-size="13" font-weight="700" fill="#4F6B23">
-                  BIEN · partir y después imputar
-                </text>
-                <rect x="292" y="48" width="200" height="42" rx="9" fill="#FFFFFF" stroke="#66862E" stroke-width="2" />
-                <text x="392" y="74" font-size="12" text-anchor="middle" fill="#1B2029" font-weight="700">train_test_split</text>
-                <path d="M340 90 L340 112" stroke="#66862E" stroke-width="2" marker-end="url(#f6-g)" />
-                <path d="M444 90 L444 112" stroke="#66862E" stroke-width="2" marker-end="url(#f6-g)" />
-                <rect x="292" y="114" width="96" height="38" rx="9" fill="#FFFFFF" stroke="#66862E" stroke-width="2" />
-                <text x="340" y="138" font-size="11" text-anchor="middle" fill="#4F6B23">fit_transform</text>
-                <rect x="396" y="114" width="96" height="38" rx="9" fill="#FFFFFF" stroke="#66862E" stroke-width="2" />
-                <text x="444" y="138" font-size="11" text-anchor="middle" fill="#4F6B23">transform</text>
-                <text x="392" y="176" font-size="11" text-anchor="middle" fill="#4F6B23" font-weight="700">
-                  la prueba nunca influyó
-                </text>
-
-                <defs>
-                  <marker id="f6-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M0 0 L10 5 L0 10 z" fill="#C55A7B" />
-                  </marker>
-                  <marker id="f6-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M0 0 L10 5 L0 10 z" fill="#66862E" />
-                  </marker>
-                </defs>
-
-                <rect x="26" y="200" width="466" height="138" rx="12" fill="#FFFFFF" stroke="#B8C2D0" stroke-width="2" />
-                <text x="44" y="226" font-size="12" font-family="monospace" fill="#5B6472">
-                  # la forma que no se puede equivocar
-                </text>
-                <text x="44" y="252" font-size="12" font-family="monospace" fill="#454F61">
-                  pipe = Pipeline([
-                </text>
-                <text x="44" y="274" font-size="12" font-family="monospace" fill="#454F61">
-                  &#160;&#160;&#160;&#160;("imp", SimpleImputer(strategy="median")),
-                </text>
-                <text x="44" y="296" font-size="12" font-family="monospace" fill="#454F61">
-                  &#160;&#160;&#160;&#160;("esc", StandardScaler()),
-                </text>
-                <text x="44" y="318" font-size="12" font-family="monospace" fill="#454F61">
-                  &#160;&#160;&#160;&#160;("mod", Ridge()),  ])
-                </text>
-              </svg>
-            </figure>
-          </article>
-          <article class="slide" data-index="7" data-module="1" data-tone="green">
-            <div class="slide-content">
-              <p class="slide-kicker">7 · Datos</p>
-              <h2><code>.value_counts()</code>: el detector de basura</h2>
-              <ul class="slide-list">
-                <li>
-                  <strong>Lo que <code>.describe()</code> no ve:</strong> las
-                  columnas de texto no tienen media ni cuartiles. Su diagnóstico
-                  es el conteo de frecuencias.
-                </li>
-                <li>
-                  <strong>Categorías duplicadas por escritura:</strong>
-                  <code>"Manizales"</code>, <code>"manizales"</code>,
-                  <code>"MANIZALES "</code> con espacio final. Para el modelo son
-                  tres ciudades distintas.
-                </li>
-                <li>
-                  <strong>Cardinalidad desbocada:</strong> si una columna tiene
-                  casi tantos valores únicos como filas, es un identificador, no
-                  una variable. Codificarla en <em>one-hot</em> genera miles de
-                  columnas inútiles.
-                </li>
-                <li>
-                  <strong>Categorías con dos casos:</strong> aparecerán en
-                  entrenamiento y no en prueba, o al revés. Conviene agruparlas en
-                  un <code>"otros"</code> antes de modelar.
-                </li>
-                <li>
-                  <strong>Con <code>normalize=True</code></strong> ves la
-                  proporción, que es lo que realmente importa para detectar clases
-                  desbalanceadas.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <svg
-                viewBox="0 0 520 360"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Conteo de frecuencias que revela categorias duplicadas por mayusculas y espacios"
-              >
-                <rect width="520" height="360" fill="#F4F7FA" />
-                <text x="26" y="34" font-size="14" font-weight="700" fill="#1B2029">
-                  df["municipio"].value_counts()
-                </text>
-
-                <g font-size="13" font-family="monospace">
-                  <text x="40" y="76" fill="#454F61">Manizales</text>
-                  <rect x="200" y="64" width="180" height="16" rx="3" fill="#7FB4CA" />
-                  <text x="392" y="76" fill="#454F61">8412</text>
-
-                  <text x="40" y="106" fill="#454F61">Pereira</text>
-                  <rect x="200" y="94" width="120" height="16" rx="3" fill="#7FB4CA" />
-                  <text x="392" y="106" fill="#454F61">5601</text>
-
-                  <text x="40" y="136" fill="#A83A59">manizales</text>
-                  <rect x="200" y="124" width="38" height="16" rx="3" fill="#C55A7B" />
-                  <text x="392" y="136" fill="#A83A59">1780</text>
-
-                  <text x="40" y="166" fill="#454F61">Armenia</text>
-                  <rect x="200" y="154" width="30" height="16" rx="3" fill="#7FB4CA" />
-                  <text x="392" y="166" fill="#454F61">1402</text>
-
-                  <text x="40" y="196" fill="#A83A59">MANIZALES&#160;</text>
-                  <rect x="200" y="184" width="12" height="16" rx="3" fill="#C55A7B" />
-                  <text x="392" y="196" fill="#A83A59">564</text>
-                </g>
-
-                <rect x="26" y="222" width="466" height="118" rx="12" fill="#FFFFFF" stroke="#C55A7B" stroke-width="2" />
-                <text x="44" y="248" font-size="13" font-weight="700" fill="#A83A59">
-                  Manizales aparece tres veces
-                </text>
-                <g font-size="12" fill="#454F61">
-                  <text x="44" y="274">Sumadas son 10.756 filas, no 8.412. El modelo las trata como</text>
-                  <text x="44" y="296">tres ciudades sin relación entre sí.</text>
-                  <text x="44" y="324" font-family="monospace" fill="#4F6B23">
-                    df["municipio"].str.strip().str.title()
-                  </text>
-                </g>
-              </svg>
-            </figure>
-          </article>
-          <article class="slide" data-index="8" data-module="1" data-tone="green">
-            <div class="slide-content">
-              <p class="slide-kicker">8 · Datos</p>
-              <h2>Escalar: cuándo es obligatorio y cuándo da igual</h2>
-              <ul class="slide-list">
-                <li>
-                  <strong>El problema:</strong> si una columna va de 0 a 1 y otra
-                  de 0 a 500.000, cualquier método basado en distancias oirá solo
-                  a la segunda. La unidad de medida decide el resultado.
-                </li>
-                <li>
-                  <strong>Lo necesitan sí o sí:</strong> k-vecinos, SVM, K-means,
-                  PCA, y toda regresión con regularización — Ridge y Lasso
-                  penalizan coeficientes, y el tamaño del coeficiente depende de
-                  la escala.
-                </li>
-                <li>
-                  <strong>Les da igual:</strong> árboles de decisión y bosques
-                  aleatorios. Parten por umbrales dentro de cada variable, así que
-                  una transformación monótona no cambia nada.
-                </li>
-                <li>
-                  <strong><code>StandardScaler</code> vs
-                  <code>MinMaxScaler</code>:</strong> el primero centra en 0 con
-                  desviación 1 y tolera colas; el segundo comprime a [0, 1] y es
-                  muy sensible a un solo valor extremo.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <svg
-                viewBox="0 0 520 360"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Dos variables con escalas muy distintas y el efecto de estandarizar sobre la distancia entre puntos"
-              >
-                <rect width="520" height="360" fill="#F4F7FA" />
-
-                <text x="26" y="32" font-size="13" font-weight="700" fill="#A83A59">sin escalar</text>
-                <rect x="26" y="44" width="210" height="150" rx="10" fill="#FFFFFF" stroke="#B8C2D0" stroke-width="2" />
-                <line x1="52" y1="172" x2="216" y2="172" stroke="#454F61" stroke-width="2" />
-                <line x1="52" y1="62" x2="52" y2="172" stroke="#454F61" stroke-width="2" />
-                <text x="134" y="190" font-size="11" fill="#5B6472" text-anchor="middle">ingreso (0 – 500 000)</text>
-                <text x="42" y="118" font-size="11" fill="#5B6472" text-anchor="middle" transform="rotate(-90 42 118)">edad</text>
-                <g fill="#7FB4CA">
-                  <circle cx="80" cy="166" r="5" /><circle cx="120" cy="164" r="5" />
-                  <circle cx="160" cy="167" r="5" /><circle cx="196" cy="165" r="5" />
-                  <circle cx="100" cy="168" r="5" /><circle cx="140" cy="163" r="5" />
-                </g>
-                <text x="134" y="146" font-size="11" fill="#A83A59" text-anchor="middle" font-weight="700">
-                  la edad se aplasta
-                </text>
-
-                <text x="284" y="32" font-size="13" font-weight="700" fill="#4F6B23">estandarizado</text>
-                <rect x="284" y="44" width="210" height="150" rx="10" fill="#FFFFFF" stroke="#66862E" stroke-width="2" />
-                <line x1="310" y1="172" x2="474" y2="172" stroke="#454F61" stroke-width="2" />
-                <line x1="310" y1="62" x2="310" y2="172" stroke="#454F61" stroke-width="2" />
-                <text x="392" y="190" font-size="11" fill="#5B6472" text-anchor="middle">ingreso (z)</text>
-                <text x="300" y="118" font-size="11" fill="#5B6472" text-anchor="middle" transform="rotate(-90 300 118)">edad (z)</text>
-                <g fill="#66862E">
-                  <circle cx="340" cy="150" r="5" /><circle cx="380" cy="108" r="5" />
-                  <circle cx="420" cy="132" r="5" /><circle cx="452" cy="80" r="5" />
-                  <circle cx="360" cy="90" r="5" /><circle cx="400" cy="160" r="5" />
-                </g>
-
-                <rect x="26" y="212" width="468" height="126" rx="12" fill="#FFFFFF" stroke="#B8C2D0" stroke-width="2" />
-                <text x="44" y="238" font-size="13" font-weight="700" fill="#1B2029">Regla práctica</text>
-                <g font-size="12" fill="#454F61">
-                  <text x="44" y="264">· ¿El método mide distancias o penaliza coeficientes? → escalá.</text>
-                  <text x="44" y="288">· ¿El método parte por umbrales (árboles)? → no hace falta.</text>
-                  <text x="44" y="312">· Ante la duda, escalá: nunca empeora, y a veces salva el modelo.</text>
-                </g>
-              </svg>
-            </figure>
           </article>
           <article class="slide" data-layout="stack" data-index="9" data-module="2" data-tone="red">
             <div class="slide-content">
@@ -4555,465 +3844,142 @@
           </article>
           <article class="slide" data-index="53" data-module="6" data-tone="yellow">
             <div class="slide-content">
-              <p class="slide-kicker">53 · Datos espaciales</p>
-              <h2>Patrones globales frente a patrones locales</h2>
+              <p class="slide-kicker">53 · Capa densa</p>
+              <h2>Una capa densa combina toda la entrada</h2>
               <ul class="slide-list">
-                <li>
-                  Las redes densas (las que hemos desarrollado hasta el momento)
-                  aprenden <strong>patrones globales</strong> de la entrada.
-                </li>
-                <li>
-                  La red convolucional aprende <strong>patrones locales</strong>:
-                  pequeñas ventanas con bordes, curvas y trazos.
-                </li>
-                <li>
-                  En imágenes eso es lo importante: un «4» se reconoce por sus
-                  trazos, sin importar dónde quedó escrito.
-                </li>
+                <li><strong>Todas las entradas llegan a cada neurona.</strong>
+                  Cada conexión tiene un peso aprendido; cada neurona usa una combinación distinta.</li>
+                <li><strong>Sumar y activar:</strong> multiplicamos cada entrada por su peso,
+                  sumamos el sesgo y aplicamos una función de activación.</li>
+                <li><strong>¿Qué hace bien?</strong> Combina variables con un significado fijo
+                  —por ejemplo, área, habitaciones y antigüedad de una vivienda—
+                  para construir características útiles para la predicción.</li>
+                <li>Una neurona combina; <strong>varias capas con activaciones no lineales</strong>
+                  permiten aprender relaciones más complejas.</li>
               </ul>
             </div>
-            <figure class="slide-figure">
-              <img src="../assets/images/cnn/localPatches.png"
-                alt="Dígito escrito a mano con ventanas locales que contienen trazos, bordes y esquinas" />
-            </figure>
-          </article>
-          <article class="slide" data-index="54" data-module="6" data-tone="orange">
-            <div class="slide-content">
-              <p class="slide-kicker">54 · Convolución</p>
-              <h2>Operación convolucional: una ventana deslizante</h2>
-              <ul class="slide-list">
-                <li>
-                  <strong>Pregunta:</strong> ¿qué concepto hay detrás de la
-                  convolución?
-                </li>
-                <li>
-                  <strong>Respuesta:</strong> una <strong>ventana deslizante</strong>.
-                  Un filtro recorre la señal y en cada posición multiplica y suma.
-                </li>
-                <li>
-                  El resultado es otra señal que dice dónde se parece la entrada al
-                  filtro.
-                </li>
-                <li>
-                  <a href="https://upload.wikimedia.org/wikipedia/commons/6/6a/Convolution_of_box_signal_with_itself2.gif" target="_blank" rel="noopener noreferrer">Animación de la convolución en 1D</a>.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <img src="../assets/images/cnn/convolution.png"
-                alt="Convolución en una dimensión como una ventana que se desliza sobre la señal" />
-            </figure>
-          </article>
-          <article class="slide" data-index="55" data-module="6" data-tone="orange">
-            <div class="slide-content">
-              <p class="slide-kicker">55 · Convolución</p>
-              <h2>La convolución en 2D</h2>
-              <ul class="slide-list">
-                <li>
-                  Aquí el concepto es el mismo: el filtro (kernel) ahora es una
-                  pequeña matriz que se desliza sobre la imagen.
-                </li>
-                <li>
-                  En cada posición se multiplican elemento a elemento la ventana
-                  y el filtro, y se suman los productos: un número por posición.
-                </li>
-                <li>
-                  El conjunto de esos números forma el <strong>mapa de
-                  características</strong> (feature map).
-                </li>
-                <li>
-                  <a href="https://upload.wikimedia.org/wikipedia/commons/1/19/2D_Convolution_Animation.gif" target="_blank" rel="noopener noreferrer">Animación de la convolución en 2D</a>.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <img src="../assets/images/cnn/conv2d.png"
-                alt="Un filtro de 3 por 3 recorre una imagen y produce el mapa de características" />
-            </figure>
-          </article>
-          <article class="slide" data-layout="stack" data-index="56" data-module="6" data-tone="orange">
-            <div class="slide-content">
-              <p class="slide-kicker">56 · Convolución</p>
-              <h2>Formalización matemática y entradas RGB</h2>
-              <ul class="slide-list">
-                <li>
-                  <strong>Pregunta:</strong> hasta ahora vimos una entrada en escala
-                  de grises. ¿Cómo es en una representación de mayor dimensión,
-                  como RGB?
-                </li>
-                <li>
-                  <strong>Respuesta:</strong> el filtro tiene tantos canales como la
-                  entrada (3 en RGB) y suma sobre todos ellos; cada filtro produce
-                  un solo mapa de características.
-                </li>
-                <li>
-                  Con varios filtros se apilan varios mapas: la salida también es
-                  un volumen.
-                  <a href="https://cs231n.github.io/convolutional-networks/" target="_blank" rel="noopener noreferrer">Animación con entrada y filtros multidimensionales (CS231n)</a>.
-                </li>
-              </ul>
-            </div>
-            <div class="slide-stack">
-              <figure class="slide-figure">
-                <img src="../assets/images/cnn/stackCnn.png"
-                  alt="Capas convolucionales apiladas: cada neurona mira una ventana local de la capa anterior" />
-              </figure>
-              <div class="slide-blocks">
-                <div class="slide-block block-math">
-                  <p class="slide-block-label">La matemática</p>
-                  <p>Convolución continua 1D:</p>
-                  <p>\[ s(t) = \int x(\tau)\, w(t-\tau)\, d\tau \]</p>
-                  <p>Convolución discreta 2D:</p>
-                  <p>\[ S(i,j) = (I * K)(i,j) = \sum_n \sum_m I(i-n,\, j-m)\, K(n,m) + b \]</p>
-                </div>
-              </div>
-            </div>
-          </article>
-          <article class="slide" data-index="57" data-module="6" data-tone="red">
-            <div class="slide-content">
-              <p class="slide-kicker">57 · Convolución</p>
-              <h2>Propiedades de la convolución</h2>
-              <ul class="slide-list">
-                <li>
-                  <strong>Los patrones aprendidos son invariantes a la
-                  traslación:</strong> un filtro que aprendió a detectar un ojo lo
-                  detecta en cualquier parte de la imagen.
-                </li>
-                <li>
-                  <strong>Aprenden de forma jerárquica:</strong> las primeras capas
-                  detectan bordes; las siguientes los combinan en partes (ojos,
-                  orejas) y las últimas en objetos («gato»).
-                </li>
-                <li>
-                  Nadie programa esa jerarquía: emerge del entrenamiento.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <img src="../assets/images/cnn/jerarquia.png"
-                alt="Jerarquía de características: bordes que se combinan en partes y partes que forman la palabra gato" />
-            </figure>
-          </article>
-          <article class="slide" data-index="58" data-module="6" data-tone="red">
-            <div class="slide-content">
-              <p class="slide-kicker">58 · Convolución</p>
-              <h2>Zancada (stride)</h2>
-              <ul class="slide-list">
-                <li>
-                  Las redes convolucionales tienen un parámetro conocido como
-                  <strong>zancada</strong> (stride) que controla cuántas posiciones
-                  salta el filtro en cada paso.
-                </li>
-                <li>
-                  Con zancada 1 las ventanas se solapan casi por completo; con
-                  zancada 2 el filtro salta de dos en dos.
-                </li>
-                <li>
-                  Con este parámetro regulamos la cantidad de
-                  <strong>superposición</strong> entre ventanas y reducimos los
-                  requerimientos de memoria, porque obtenemos volúmenes más
-                  pequeños.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <img src="../assets/images/cnn/strides.jpg"
-                alt="Comparación entre zancada 1 y zancada 2 al desplazar el filtro" />
-            </figure>
-          </article>
-          <article class="slide" data-index="59" data-module="6" data-tone="purple">
-            <div class="slide-content">
-              <p class="slide-kicker">59 · Convolución</p>
-              <h2>Relleno (padding)</h2>
-              <ul class="slide-list">
-                <li>
-                  El <strong>relleno</strong> (padding) consiste en agregar bordes
-                  a la imagen, generalmente con ceros.
-                </li>
-                <li>
-                  Sirve para que el filtro pueda calcular sobre
-                  <strong>todos</strong> los píxeles de la entrada, incluidos los
-                  de los bordes.
-                </li>
-                <li>
-                  Sin relleno, cada capa encoge la imagen; con el relleno
-                  adecuado (<code>padding="same"</code>) la salida conserva el
-                  tamaño de la entrada.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <img src="../assets/images/cnn/padding.png"
-                alt="Imagen rodeada por un borde de ceros antes de aplicar el filtro" />
-            </figure>
-          </article>
-          <article class="slide" data-index="60" data-module="6" data-tone="purple">
-            <div class="slide-content">
-              <p class="slide-kicker">60 · Agrupamiento</p>
-              <h2>Agrupamiento (pooling)</h2>
-              <ul class="slide-list">
-                <li>
-                  El agrupamiento (pooling) sigue la misma lógica de la ventana
-                  deslizante, excepto que aquí <strong>no</strong> se realiza un
-                  producto punto: no tiene pesos que aprender.
-                </li>
-                <li>
-                  <strong>Max pooling</strong> se queda con el valor máximo de cada
-                  ventana; <strong>average pooling</strong>, con el promedio.
-                </li>
-                <li>
-                  Casi siempre se usa una ventana de 2×2 con zancada 2: el mapa
-                  pierde la mitad de su ancho y de su alto.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <img src="../assets/images/cnn/pooling.png"
-                alt="Max pooling de 2 por 2 con zancada 2 sobre un mapa de características" />
-            </figure>
-          </article>
-          <article class="slide" data-layout="stack" data-index="61" data-module="6" data-tone="magenta">
-            <div class="slide-content">
-              <p class="slide-kicker">61 · Resumen</p>
-              <h2>Resumen: de un volumen a otro volumen</h2>
-              <ul class="slide-list">
-                <li>
-                  La capa convolucional acepta un volumen de
-                  \(W_1 \times H_1 \times D_1\).
-                </li>
-                <li>
-                  <strong>Parámetros requeridos:</strong> número de filtros
-                  \(K\), tamaño del filtro \(F\), zancada \(S\) y relleno \(P\).
-                </li>
-                <li>
-                  Produce un volumen de \(W_2 \times H_2 \times D_2\).
-                </li>
-                <li>
-                  Si \(W_2\) no da entero, la combinación de \(F\), \(S\) y \(P\)
-                  no encaja con la entrada.
-                </li>
-              </ul>
-            </div>
-            <div class="slide-stack">
-              <figure class="slide-figure">
-                <img src="../assets/images/cnn/stackCnn.png"
-                  alt="Volúmenes apilados de una red convolucional" />
-              </figure>
-              <div class="slide-blocks">
-                <div class="slide-block block-math">
-                  <p class="slide-block-label">Tamaño de salida</p>
-                  <p>\[ W_2 = \frac{W_1 - F + 2P}{S} + 1 \qquad H_2 = \frac{H_1 - F + 2P}{S} + 1 \qquad D_2 = K \]</p>
-                </div>
-                <div class="slide-block block-math">
-                  <p class="slide-block-label">Total de parámetros</p>
-                  <p>Pesos por filtro: \( F \cdot F \cdot D_1 + 1 \)</p>
-                  <p>Total por capa: \( (F \cdot F \cdot D_1 + 1)\,K \)</p>
-                </div>
-              </div>
-            </div>
-          </article>
-          <article class="slide" data-index="62" data-module="6" data-tone="magenta">
-            <div class="slide-content">
-              <p class="slide-kicker">62 · Tareas</p>
-              <h2>Tareas de visión por computador con CNN</h2>
-              <ul class="slide-list">
-                <li>
-                  <strong>Clasificación:</strong> una etiqueta por imagen
-                  («gato»). Es la tarea de ImageNet y de MNIST.
-                </li>
-                <li>
-                  <strong>Localización:</strong> la etiqueta más una caja que
-                  encierra al único objeto.
-                </li>
-                <li>
-                  <strong>Detección de objetos:</strong> varias cajas con su clase
-                  en la misma imagen (por ejemplo, la familia YOLO).
-                </li>
-                <li>
-                  <strong>Segmentación:</strong> una etiqueta por píxel;
-                  <em>semántica</em> (todos los gatos igual) o <em>de
-                  instancias</em> (cada gato por separado).
-                </li>
-                <li>
-                  Todas comparten la misma base: capas convolucionales que
-                  extraen características; lo que cambia es la
-                  <strong>última parte</strong> de la red y la pérdida.
-                </li>
-              </ul>
-            </div>
-            <figure class="slide-figure">
-              <svg viewBox="0 0 520 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-                aria-label="Cuatro tareas de vision por computador sobre la misma escena: clasificacion, localizacion, deteccion y segmentacion">
-                <rect width="520" height="360" fill="#F4F7FA" />
-                <text x="26" y="30" font-size="14" font-weight="700" fill="#1B2029">
-                  La misma escena, cuatro preguntas distintas
-                </text>
-
-                <g stroke="#B8C2D0" stroke-width="1.5">
-                  <rect x="26" y="46" width="228" height="140" rx="10" fill="#FFFFFF" />
-                  <rect x="266" y="46" width="228" height="140" rx="10" fill="#FFFFFF" />
-                  <rect x="26" y="198" width="228" height="140" rx="10" fill="#FFFFFF" />
-                  <rect x="266" y="198" width="228" height="140" rx="10" fill="#FFFFFF" />
+            <figure class="slide-figure dense-demo">
+              <label for="dense-pause">Pausar animación (entradas → pesos → activación)</label>
+              <input type="checkbox" id="dense-pause" />
+              <svg viewBox="0 0 520 390" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+                aria-labelledby="dense-title dense-desc">
+                <title id="dense-title">Tres entradas conectadas a dos neuronas</title>
+                <desc id="dense-desc">La animación resalta entradas, conexiones y resultados.
+                  Con entradas 2, 1 y 3, pesos 0,5, 1 y 0,5 y sesgo cero,
+                  la primera neurona produce ReLU de 3,5 igual a 3,5.
+                  La segunda usa pesos menos 1, 0,5 y 1 y produce 1,5.</desc>
+                <rect width="520" height="390" rx="12" fill="#F4F7FA" />
+                <text x="28" y="30" font-size="14" font-weight="700" fill="#1B2029">1. Entradas</text>
+                <text x="224" y="30" font-size="14" font-weight="700" fill="#1B2029">2. Pesos y suma</text>
+                <text x="375" y="30" font-size="14" font-weight="700" fill="#1B2029">3. ReLU</text>
+                <g stroke="#66862E" stroke-width="2" class="dense-flow">
+                  <path d="M100 80 L280 120 M100 170 L280 120 M100 260 L280 120" />
                 </g>
-
-                <!-- Clasificacion -->
-                <circle cx="110" cy="120" r="26" fill="#E7D9C3" stroke="#454F61" stroke-width="2" />
-                <path d="M88 102 L92 82 L104 96 Z M132 102 L128 82 L116 96 Z" fill="#E7D9C3" stroke="#454F61" stroke-width="2" />
-                <text x="40" y="70" font-size="12" font-weight="700" fill="#4E93B0">Clasificación</text>
-                <text x="150" y="126" font-size="13" font-weight="700" fill="#4E93B0">«gato»</text>
-
-                <!-- Localizacion -->
-                <circle cx="350" cy="120" r="26" fill="#E7D9C3" stroke="#454F61" stroke-width="2" />
-                <path d="M328 102 L332 82 L344 96 Z M372 102 L368 82 L356 96 Z" fill="#E7D9C3" stroke="#454F61" stroke-width="2" />
-                <rect x="318" y="76" width="64" height="74" stroke="#66862E" stroke-width="2.5" />
-                <text x="280" y="70" font-size="12" font-weight="700" fill="#66862E">Localización</text>
-                <text x="392" y="126" font-size="12" fill="#66862E">gato + caja</text>
-
-                <!-- Deteccion -->
-                <circle cx="80" cy="282" r="20" fill="#E7D9C3" stroke="#454F61" stroke-width="2" />
-                <path d="M64 268 L66 252 L76 262 Z M96 268 L94 252 L84 262 Z" fill="#E7D9C3" stroke="#454F61" stroke-width="2" />
-                <rect x="56" y="246" width="48" height="60" stroke="#C55A7B" stroke-width="2.5" />
-                <circle cx="180" cy="290" r="20" fill="#C9D6E3" stroke="#454F61" stroke-width="2" />
-                <ellipse cx="166" cy="276" rx="6" ry="12" fill="#C9D6E3" stroke="#454F61" stroke-width="2" />
-                <ellipse cx="194" cy="276" rx="6" ry="12" fill="#C9D6E3" stroke="#454F61" stroke-width="2" />
-                <rect x="154" y="258" width="52" height="56" stroke="#A8781A" stroke-width="2.5" />
-                <text x="40" y="222" font-size="12" font-weight="700" fill="#C55A7B">Detección</text>
-                <text x="56" y="326" font-size="11" fill="#C55A7B">gato</text>
-                <text x="154" y="330" font-size="11" fill="#A8781A">perro</text>
-
-                <!-- Segmentacion -->
-                <circle cx="330" cy="282" r="20" fill="#C55A7B" fill-opacity="0.55" stroke="#C55A7B" stroke-width="2" />
-                <path d="M314 268 L316 252 L326 262 Z M346 268 L344 252 L334 262 Z" fill="#C55A7B" fill-opacity="0.55" stroke="#C55A7B" stroke-width="2" />
-                <circle cx="430" cy="290" r="20" fill="#A8781A" fill-opacity="0.55" stroke="#A8781A" stroke-width="2" />
-                <ellipse cx="416" cy="276" rx="6" ry="12" fill="#A8781A" fill-opacity="0.55" stroke="#A8781A" stroke-width="2" />
-                <ellipse cx="444" cy="276" rx="6" ry="12" fill="#A8781A" fill-opacity="0.55" stroke="#A8781A" stroke-width="2" />
-                <text x="280" y="222" font-size="12" font-weight="700" fill="#1B2029">Segmentación</text>
-                <text x="296" y="330" font-size="11" fill="#454F61">una etiqueta por píxel</text>
+                <g stroke="#347E98" stroke-width="2" class="dense-flow">
+                  <path d="M100 80 L280 230 M100 170 L280 230 M100 260 L280 230" />
+                </g>
+                <g fill="#FFFFFF" stroke="#347E98" stroke-width="2" class="dense-input">
+                  <circle cx="76" cy="80" r="24" /><circle cx="76" cy="170" r="24" /><circle cx="76" cy="260" r="24" />
+                </g>
+                <g fill="#1B2029" font-size="18" text-anchor="middle">
+                  <text x="76" y="86">2</text><text x="76" y="176">1</text><text x="76" y="266">3</text>
+                </g>
+                <g fill="#FFFFFF" stroke="#66862E" stroke-width="2" class="dense-result">
+                  <circle cx="292" cy="120" r="28" /><rect x="378" y="96" width="110" height="48" rx="10" />
+                </g>
+                <g fill="#FFFFFF" stroke="#347E98" stroke-width="2" class="dense-result">
+                  <circle cx="292" cy="230" r="28" /><rect x="378" y="206" width="110" height="48" rx="10" />
+                </g>
+                <path d="M321 120 H376 M321 230 H376" stroke="#454F61" stroke-width="2" />
+                <g fill="#1B2029" font-size="17" text-anchor="middle">
+                  <text x="292" y="126">Σ</text><text x="292" y="236">Σ</text>
+                  <text x="433" y="126">3,5</text><text x="433" y="236">1,5</text>
+                </g>
+                <g font-size="13" fill="#454F61">
+                  <text x="28" y="310">Neurona 1: 2 × 0,5 + 1 × 1 + 3 × 0,5 + 0 = 3,5</text>
+                  <text x="28" y="334">Neurona 2: 2 × (−1) + 1 × 0,5 + 3 × 1 + 0 = 1,5</text>
+                  <text x="28" y="368" font-weight="700">ReLU(z) = máx(0, z) · sesgos = 0 en este ejemplo</text>
+                </g>
               </svg>
             </figure>
           </article>
-          <article class="slide" data-index="63" data-module="6" data-tone="cyan">
+          <article class="slide" data-index="54" data-module="6" data-tone="yellow">
             <div class="slide-content">
-              <p class="slide-kicker">63 · Tarea</p>
-              <h2>Tarea: calcular la arquitectura a mano</h2>
+              <p class="slide-kicker">54 · Densa frente a convolución</p>
+              <h2>Una imagen no es solo una lista de valores</h2>
               <ul class="slide-list">
-                <li>
-                  Use las fórmulas del resumen. Para cada caso calcule el volumen
-                  de salida y el número de parámetros.
-                </li>
-                <li>
-                  <strong>1.</strong> Entrada 32×32×3, \(K=6\), \(F=5\), \(S=1\),
-                  \(P=0\). (La primera capa de LeNet-5 sobre una imagen a color.)
-                </li>
-                <li>
-                  <strong>2.</strong> A la salida anterior aplique max pooling de
-                  2×2 con zancada 2.
-                </li>
-                <li>
-                  <strong>3.</strong> Entrada 227×227×3, \(K=96\), \(F=11\),
-                  \(S=4\), \(P=0\). (La primera capa de AlexNet.)
-                </li>
-                <li>
-                  <strong>4.</strong> Entrada 64×64×16, \(K=32\), \(F=3\), \(S=1\),
-                  \(P=1\). ¿Por qué el ancho y el alto no cambian?
-                </li>
-                <li>
-                  <strong>Explorar:</strong> verifique sus respuestas en
-                  <a href="https://poloclub.github.io/cnn-explainer/" target="_blank" rel="noopener noreferrer">CNN Explainer</a>
-                  y vea una red entrenada sobre dígitos en el
-                  <a href="https://adamharley.com/nn_vis/cnn/2d.html" target="_blank" rel="noopener noreferrer">visualizador de Adam Harley</a>.
-                </li>
+                <li><strong>Mirá el trazo blanco:</strong> es la misma forma, pero se desplaza
+                  hacia la derecha. La animación compara ambas capas sobre los mismos píxeles.</li>
+                <li><strong>Densa:</strong> este detector tiene pesos 1 en tres posiciones
+                  de la izquierda y 0 en las demás. Al moverse el trazo, su respuesta cae de 3 a 0.
+                  Otra neurona podría aprender la nueva posición, pero no comparte esos pesos automáticamente.</li>
+                <li><strong>Convolución:</strong> el filtro 3 × 3 tiene unos en su columna central
+                  y ceros en las otras. Se reutiliza en cada ventana: la respuesta 3 se mueve
+                  en el mapa, sin aprender otro filtro.</li>
+                <li>Aplanar <strong>no borra los valores</strong>. Lo que falta en la densa es
+                  una estructura que aproveche la vecindad y comparta pesos entre posiciones.</li>
+                <li>Con 224 × 224 × 3 entradas y 128 neuronas: <strong>19 267 712 parámetros</strong>
+                  en una densa. Aquí mostramos un detector, <strong>no una clasificación completa</strong>:
+                  una CNN no es automáticamente invariante a desplazamientos.</li>
               </ul>
             </div>
-            <figure class="slide-figure">
-              <svg viewBox="0 0 520 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-                aria-label="Tabla de respuestas de la tarea para verificar despues de calcular">
-                <rect width="520" height="360" fill="#F4F7FA" />
-                <text x="26" y="34" font-size="14" font-weight="700" fill="#1B2029">
-                  Para verificar (después de calcular)
-                </text>
-
-                <rect x="26" y="52" width="468" height="246" rx="10" fill="#FFFFFF" stroke="#B8C2D0" stroke-width="2" />
-                <g font-size="12" font-weight="700" fill="#1B2029">
-                  <text x="44" y="80">Caso</text><text x="110" y="80">Salida</text><text x="300" y="80">Parámetros</text>
+            <figure class="slide-figure dense-demo">
+              <label for="spatial-pause">Pausar comparación automática</label>
+              <input type="checkbox" id="spatial-pause" />
+              <label for="spatial-shift">Ver imagen desplazada (control manual)</label>
+              <input type="checkbox" id="spatial-shift" />
+              <svg class="spatial-comparison" viewBox="0 0 520 390" fill="none" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-labelledby="spatial-title spatial-desc">
+                <title id="spatial-title">Un mismo trazo, dos formas de usar los pesos</title>
+                <desc id="spatial-desc">Dos imágenes de 7 por 5 píxeles muestran un trazo vertical
+                  blanco sobre fondo oscuro. Se alternan su posición izquierda y derecha.
+                  Un detector denso fijo a la izquierda responde 3 y después 0.
+                  Un filtro convolucional compartido responde 3 en una nueva posición del mapa.
+                  Los demás píxeles valen cero; los blancos valen uno. Sin sesgo ni padding, paso uno.
+                  El mapa ilustrado es la fila central de la salida convolucional.</desc>
+                <rect width="520" height="390" rx="12" fill="#F4F7FA" />
+                <g fill="#1B2029" font-size="14" font-weight="700">
+                  <text x="40" y="30">DENSA</text><text x="300" y="30">CONVOLUCIÓN</text>
                 </g>
-                <line x1="44" y1="90" x2="476" y2="90" stroke="#B8C2D0" />
-                <g font-size="12" fill="#454F61">
-                  <text x="44" y="122">1</text><text x="110" y="122">28 × 28 × 6</text><text x="300" y="122">(5·5·3 + 1)·6 = 456</text>
-                  <text x="44" y="170">2</text><text x="110" y="170">14 × 14 × 6</text><text x="300" y="170">0 (pooling no aprende)</text>
-                  <text x="44" y="218">3</text><text x="110" y="218">55 × 55 × 96</text><text x="300" y="218">(11·11·3 + 1)·96 = 34 944</text>
-                  <text x="44" y="266">4</text><text x="110" y="266">64 × 64 × 32</text><text x="300" y="266">(3·3·16 + 1)·32 = 4640</text>
+                <g fill="#454F61" font-size="12">
+                  <text x="40" y="53">Pesos fijos por posición</text>
+                  <text x="300" y="53">Mismo filtro en cada ventana</text>
                 </g>
-
-                <text x="26" y="326" font-size="12" fill="#A83A59" font-weight="700">
-                  Caso 4: con F = 3 y P = 1, W₂ = (64 − 3 + 2)/1 + 1 = 64.
-                </text>
+                <g class="spatial-before">
+                  <g data-pixel-image="dense-1"><rect x="40" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="103" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="123" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="143" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="103" width="60" height="60" stroke="#A83A59" stroke-width="3" /></g><g data-pixel-image="conv-1"><rect x="300" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="103" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="123" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="143" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="103" width="60" height="60" stroke="#347E98" stroke-width="3" /></g><text x="40" y="222" font-size="18" font-weight="700" fill="#A83A59">Respuesta: 3</text><text x="300" y="222" font-size="18" font-weight="700" fill="#347E98">Respuesta: 3</text><rect x="300" y="238" width="28" height="28" fill="#347E98" stroke="#347E98" /><text x="314" y="257" text-anchor="middle" font-size="13" fill="#FFFFFF">3</text><rect x="328" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="342" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text><rect x="356" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="370" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text><rect x="384" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="398" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text><rect x="412" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="426" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text>
+                  <text x="40" y="294" font-size="14" fill="#1B2029">1. El trazo está a la izquierda.</text>
+                </g>
+                <g class="spatial-after">
+                  <g data-pixel-image="dense-4"><rect x="40" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="103" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="123" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="143" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="103" width="60" height="60" stroke="#A83A59" stroke-width="3" /></g><g data-pixel-image="conv-4"><rect x="300" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="103" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="123" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="143" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="103" width="60" height="60" stroke="#347E98" stroke-width="3" /></g><text x="40" y="222" font-size="18" font-weight="700" fill="#A83A59">Respuesta: 0</text><text x="300" y="222" font-size="18" font-weight="700" fill="#347E98">Respuesta: 3</text><rect x="300" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="314" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text><rect x="328" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="342" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text><rect x="356" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="370" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text><rect x="384" y="238" width="28" height="28" fill="#347E98" stroke="#347E98" /><text x="398" y="257" text-anchor="middle" font-size="13" fill="#FFFFFF">3</text><rect x="412" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="426" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text>
+                  <text x="40" y="294" font-size="14" fill="#1B2029">2. Misma forma, nueva posición.</text>
+                </g>
+                <text x="300" y="281" font-size="11" fill="#454F61">Mapa de respuesta · fila central</text>
+                <rect x="24" y="311" width="472" height="58" rx="10" fill="#FFFFFF" stroke="#347E98" stroke-width="2" />
+                <text x="40" y="335" font-size="14" font-weight="700" fill="#347E98">Mismos pesos, otra posición</text>
+                <text x="40" y="355" font-size="12" fill="#454F61">No es una clasificación completa: el mapa se desplaza.</text>
               </svg>
             </figure>
           </article>
-          <article class="slide" data-index="64" data-module="6" data-tone="cyan">
+          <article class="slide" data-index="55" data-module="6" data-tone="yellow">
             <div class="slide-content">
-              <p class="slide-kicker">64 · Cierre</p>
-              <h2>Ochenta años en una suma ponderada</h2>
+              <p class="slide-kicker">55 · Del detector al filtro</p>
+              <h2>Un filtro es una pequeña matriz de pesos</h2>
               <ul class="slide-list">
-                <li>
-                  <strong>Todo lo que vimos es una pieza repetida:</strong>
-                  \(\varphi(\mathbf{w}^{\top}\mathbf{x}+b)\). Lo que cambia entre un
-                  perceptrón, un MLP y una CNN es <em>cómo se conectan</em> esas
-                  piezas y qué supuesto codifica esa conexión.
-                </li>
-                <li>
-                  <strong>La arquitectura es un supuesto</strong>, igual que en los
-                  módulos anteriores. La convolución supone que lo relevante es
-                  local y se repite; si eso no vale en tus datos, no hay red que lo
-                  arregle.
-                </li>
-                <li>
-                  <strong>Entrenar sigue siendo validar.</strong> Las mismas reglas
-                  del curso: partir antes de transformar, no tocar el conjunto de
-                  prueba, y desconfiar del resultado que sale bien al primer
-                  intento.
-                </li>
-                <li>
-                  <strong>La historia deja una lección operativa:</strong> dos
-                  inviernos llegaron por prometer de más. Quien entiende la
-                  matemática es quien puede separar un resultado de un titular — y
-                  ese es el trabajo, no escribir el <code>fit</code>.
-                </li>
-                <li>
-                  <strong>Lo que sigue</strong> —transformadores, modelos de
-                  lenguaje, generación— se construye con estas mismas piezas.
-                  Ninguna es nueva. La base ya está puesta.
-                </li>
+                <li><strong>La misma lógica de una neurona:</strong> multiplicar cada entrada
+                  por su peso, sumar y añadir un sesgo. Después puede aplicarse una activación.</li>
+                <li><strong>Ahora las entradas son una ventana de la imagen.</strong>
+                  Este filtro 3 × 3 mira nueve píxeles, no la imagen completa.</li>
+                <li>Los pesos resaltados dan importancia a una columna vertical.
+                  Cuando coincide con el trazo blanco, la suma vale <strong>3</strong>.</li>
+                <li><strong>Deslizar sin cambiar los pesos:</strong> cada posición produce un número.
+                  Al ordenarlos obtenemos un <strong>mapa de características</strong>.</li>
+                <li>Este filtro es ilustrativo: en una CNN, <strong>los pesos se aprenden</strong>.
+                  No tiene que suavizar la imagen como un filtro fotográfico; puede resaltar patrones.</li>
               </ul>
             </div>
             <figure class="slide-figure">
-              <svg viewBox="0 0 520 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-                aria-label="Sintesis del modulo: la misma neurona conectada de tres maneras distintas y el supuesto que codifica cada arquitectura">
-                <rect width="520" height="360" fill="#F4F7FA" />
-                <text x="26" y="34" font-size="14" font-weight="700" fill="#1B2029">
-                  La misma pieza, tres maneras de conectarla
-                </text>
-
-                <rect x="26" y="52" width="468" height="52" rx="10" fill="#FFFFFF" stroke="#1B2029" stroke-width="3" />
-                <text x="260" y="84" font-size="18" font-weight="700" fill="#1B2029" text-anchor="middle">a = φ(wᵀx + b)</text>
-
-                <rect x="26" y="122" width="468" height="46" rx="9" fill="#FFFFFF" stroke="#4E93B0" stroke-width="2" />
-                <text x="44" y="143" font-size="13" font-weight="700" fill="#4E93B0">Perceptrón</text>
-                <text x="44" y="161" font-size="12" fill="#454F61">una capa · supone que las clases se separan con una recta</text>
-
-                <rect x="26" y="178" width="468" height="46" rx="9" fill="#FFFFFF" stroke="#66862E" stroke-width="2" />
-                <text x="44" y="199" font-size="13" font-weight="700" fill="#66862E">MLP</text>
-                <text x="44" y="217" font-size="12" fill="#454F61">capas densas · supone que la representación útil se puede aprender</text>
-
-                <rect x="26" y="234" width="468" height="46" rx="9" fill="#FFFFFF" stroke="#C55A7B" stroke-width="2" />
-                <text x="44" y="255" font-size="13" font-weight="700" fill="#C55A7B">CNN</text>
-                <text x="44" y="273" font-size="12" fill="#454F61">filtros compartidos · supone que el patrón es local y se repite</text>
-
-                <rect x="26" y="294" width="468" height="48" rx="9" fill="#FFFFFF" stroke="#A83A59" stroke-width="3" />
-                <text x="44" y="315" font-size="12" font-weight="700" fill="#A83A59">Lo que no cambió en todo el curso</text>
-                <text x="44" y="333" font-size="12" fill="#454F61">un modelo que corre sin errores no dice que sus supuestos se cumplan</text>
-              </svg>
+              <img src="convolution-filter.svg"
+                alt="Imagen con un trazo vertical, ventana de nueve píxeles y filtro con unos en la columna central. Los productos se suman para dar 3, que se guarda en el mapa de características." />
             </figure>
           </article>
         </main>
@@ -5039,7 +4005,7 @@
             <path d="M15 5 L8 12 L15 19" />
           </svg>
         </button>
-        <span id="counter">01 / 65</span>
+        <span id="counter">01 / 48</span>
         <button type="button" id="next" class="solid" aria-label="Slide siguiente" title="Siguiente">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M9 5 L16 12 L9 19" />

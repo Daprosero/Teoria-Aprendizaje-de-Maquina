@@ -1,0 +1,93 @@
+/* Local teaching diagrams; the shared deck theme remains unchanged. */
+.dense-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dense-demo svg {
+  flex: 1;
+  min-height: 0;
+}
+.dense-demo label {
+  display: inline-block;
+  color: var(--subtext1);
+  font-size: 0.85rem;
+}
+.dense-demo input {
+  align-self: flex-start;
+  accent-color: var(--accent);
+}
+.dense-demo .dense-input,
+.dense-demo .dense-flow,
+.dense-demo .dense-result {
+  animation: none;
+}
+.slide.is-active .dense-input {
+  animation: dense-input 6s linear infinite;
+}
+.slide.is-active .dense-flow {
+  stroke-dasharray: 12 8;
+  animation: dense-flow 6s linear infinite;
+}
+.slide.is-active .dense-result {
+  animation: dense-result 6s linear infinite;
+}
+#dense-pause:checked ~ svg .dense-input,
+#dense-pause:checked ~ svg .dense-flow,
+#dense-pause:checked ~ svg .dense-result {
+  animation: none;
+}
+@keyframes dense-input {
+  0%, 25% { stroke-width: 4; }
+  35%, 100% { stroke-width: 2; }
+}
+@keyframes dense-flow {
+  0%, 20% { opacity: 0.3; stroke-dashoffset: 60; }
+  30%, 65% { opacity: 1; }
+  80%, 100% { opacity: 0.3; stroke-dashoffset: -60; }
+}
+@keyframes dense-result {
+  0%, 60% { stroke-width: 2; }
+  70%, 95% { stroke-width: 5; }
+  100% { stroke-width: 2; }
+}
+/* Two synchronized image states make weight sharing visible without video. */
+.spatial-before { opacity: 1; }
+.spatial-after { opacity: 0; }
+.slide.is-active .spatial-before {
+  animation: spatial-before 6s steps(1, end) infinite;
+}
+.slide.is-active .spatial-after {
+  animation: spatial-after 6s steps(1, end) infinite;
+}
+#spatial-pause:checked ~ svg .spatial-before,
+#spatial-pause:checked ~ svg .spatial-after {
+  animation-play-state: paused;
+}
+#spatial-shift:checked ~ svg .spatial-before {
+  animation: none;
+  opacity: 0;
+}
+#spatial-shift:checked ~ svg .spatial-after {
+  animation: none;
+  opacity: 1;
+}
+@keyframes spatial-before {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes spatial-after {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide.is-active .spatial-before,
+  .slide.is-active .spatial-after {
+    animation: none;
+  }
+  .slide.is-active .dense-input,
+  .slide.is-active .dense-flow,
+  .slide.is-active .dense-result {
+    animation: none;
+  }
+}

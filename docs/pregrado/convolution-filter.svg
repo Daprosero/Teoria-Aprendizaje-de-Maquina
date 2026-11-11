@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" role="img" aria-labelledby="title desc">
+<title id="title">Cómo un filtro convierte píxeles en una respuesta</title>
+<desc id="desc">Una imagen binaria de siete columnas y cinco filas contiene un trazo vertical.
+La ventana seleccionada y el filtro tienen filas cero, uno, cero. Se multiplican por posición
+los nueve pares de valores y se suman: tres. Ese valor ocupa la primera columna y segunda fila
+del mapa de salida. Con paso uno, sin padding y sesgo cero, el mapa tiene tres filas y cinco columnas.</desc>
+<rect width="600" height="420" rx="12" fill="#F4F7FA" />
+<g font-family="sans-serif" fill="#1B2029">
+<text x="24" y="30" font-size="15" font-weight="700">1. Imagen</text>
+<text x="226" y="30" font-size="15" font-weight="700">2. Ventana</text>
+<text x="396" y="30" font-size="15" font-weight="700">3. Filtro (pesos)</text>
+
+<rect x="24" y="56" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="46" y="56" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="68" y="56" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="90" y="56" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="112" y="56" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="134" y="56" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="156" y="56" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="24" y="78" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="46" y="78" width="22" height="22" fill="#FFFFFF" stroke="#AAB7C5" />
+<rect x="68" y="78" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="90" y="78" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="112" y="78" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="134" y="78" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="156" y="78" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="24" y="100" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="46" y="100" width="22" height="22" fill="#FFFFFF" stroke="#AAB7C5" />
+<rect x="68" y="100" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="90" y="100" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="112" y="100" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="134" y="100" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="156" y="100" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="24" y="122" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="46" y="122" width="22" height="22" fill="#FFFFFF" stroke="#AAB7C5" />
+<rect x="68" y="122" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="90" y="122" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="112" y="122" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="134" y="122" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="156" y="122" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="24" y="144" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="46" y="144" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="68" y="144" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="90" y="144" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="112" y="144" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="134" y="144" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="156" y="144" width="22" height="22" fill="#454F61" stroke="#AAB7C5" />
+<rect x="24" y="78" width="66" height="66" fill="none" stroke="#C17626" stroke-width="3" />
+<path d="M182 109 H213 M206 102 L213 109 L206 116" fill="none" stroke="#C17626" stroke-width="2" />
+<text x="350" y="111" font-size="27" text-anchor="middle">×</text>
+
+<g id="filter-patch">
+<rect x="226" y="61" width="32" height="32" fill="#FFFFFF" stroke="#C17626" /><text x="242" y="83" text-anchor="middle" font-size="18">0</text>
+<rect x="258" y="61" width="32" height="32" fill="#E4F0F3" stroke="#C17626" /><text x="274" y="83" text-anchor="middle" font-size="18">1</text>
+<rect x="290" y="61" width="32" height="32" fill="#FFFFFF" stroke="#C17626" /><text x="306" y="83" text-anchor="middle" font-size="18">0</text>
+<rect x="226" y="93" width="32" height="32" fill="#FFFFFF" stroke="#C17626" /><text x="242" y="115" text-anchor="middle" font-size="18">0</text>
+<rect x="258" y="93" width="32" height="32" fill="#E4F0F3" stroke="#C17626" /><text x="274" y="115" text-anchor="middle" font-size="18">1</text>
+<rect x="290" y="93" width="32" height="32" fill="#FFFFFF" stroke="#C17626" /><text x="306" y="115" text-anchor="middle" font-size="18">0</text>
+<rect x="226" y="125" width="32" height="32" fill="#FFFFFF" stroke="#C17626" /><text x="242" y="147" text-anchor="middle" font-size="18">0</text>
+<rect x="258" y="125" width="32" height="32" fill="#E4F0F3" stroke="#C17626" /><text x="274" y="147" text-anchor="middle" font-size="18">1</text>
+<rect x="290" y="125" width="32" height="32" fill="#FFFFFF" stroke="#C17626" /><text x="306" y="147" text-anchor="middle" font-size="18">0</text>
+</g>
+<g id="filter-weights">
+<rect x="396" y="61" width="32" height="32" fill="#FFFFFF" stroke="#347E98" /><text x="412" y="83" text-anchor="middle" font-size="18">0</text>
+<rect x="428" y="61" width="32" height="32" fill="#E4F0F3" stroke="#347E98" /><text x="444" y="83" text-anchor="middle" font-size="18">1</text>
+<rect x="460" y="61" width="32" height="32" fill="#FFFFFF" stroke="#347E98" /><text x="476" y="83" text-anchor="middle" font-size="18">0</text>
+<rect x="396" y="93" width="32" height="32" fill="#FFFFFF" stroke="#347E98" /><text x="412" y="115" text-anchor="middle" font-size="18">0</text>
+<rect x="428" y="93" width="32" height="32" fill="#E4F0F3" stroke="#347E98" /><text x="444" y="115" text-anchor="middle" font-size="18">1</text>
+<rect x="460" y="93" width="32" height="32" fill="#FFFFFF" stroke="#347E98" /><text x="476" y="115" text-anchor="middle" font-size="18">0</text>
+<rect x="396" y="125" width="32" height="32" fill="#FFFFFF" stroke="#347E98" /><text x="412" y="147" text-anchor="middle" font-size="18">0</text>
+<rect x="428" y="125" width="32" height="32" fill="#E4F0F3" stroke="#347E98" /><text x="444" y="147" text-anchor="middle" font-size="18">1</text>
+<rect x="460" y="125" width="32" height="32" fill="#FFFFFF" stroke="#347E98" /><text x="476" y="147" text-anchor="middle" font-size="18">0</text>
+</g>
+<g font-size="12" fill="#454F61">
+<text x="24" y="187">Blanco = 1 · oscuro = 0</text>
+<text x="226" y="187">Los píxeles seleccionados</text>
+<text x="396" y="187">Los mismos en cada ventana</text></g>
+<rect x="24" y="207" width="552" height="59" rx="10" fill="#FFFFFF" stroke="#C17626" stroke-width="2" />
+<text x="40" y="231" font-size="15" font-weight="700">Multiplicar por posición y sumar</text>
+<text x="40" y="253" font-size="15">(0·0 + 1·1 + 0·0) × 3 filas + 0 de sesgo = 3</text>
+<text x="24" y="298" font-size="15" font-weight="700">4. Guardar el resultado</text>
+<text x="24" y="324" font-size="13">Mover la ventana y repetir la cuenta.</text>
+<text x="24" y="348" font-size="13">Cada respuesta forma el mapa.</text>
+<text x="24" y="389" font-size="12" fill="#454F61">Paso 1 · sin padding · sin activación</text>
+<g id="filter-map">
+
+<rect x="396" y="289" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="411" y="310" text-anchor="middle" font-size="17" fill="#1B2029">2</text>
+<rect x="426" y="289" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="441" y="310" text-anchor="middle" font-size="17" fill="#1B2029">0</text>
+<rect x="456" y="289" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="471" y="310" text-anchor="middle" font-size="17" fill="#1B2029">0</text>
+<rect x="486" y="289" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="501" y="310" text-anchor="middle" font-size="17" fill="#1B2029">0</text>
+<rect x="516" y="289" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="531" y="310" text-anchor="middle" font-size="17" fill="#1B2029">0</text>
+<rect x="396" y="319" width="30" height="30" fill="#C17626" stroke="#347E98" /><text x="411" y="340" text-anchor="middle" font-size="17" fill="#FFFFFF">3</text>
+<rect x="426" y="319" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="441" y="340" text-anchor="middle" font-size="17" fill="#1B2029">0</text>
+<rect x="456" y="319" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="471" y="340" text-anchor="middle" font-size="17" fill="#1B2029">0</text>
+<rect x="486" y="319" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="501" y="340" text-anchor="middle" font-size="17" fill="#1B2029">0</text>
+<rect x="516" y="319" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="531" y="340" text-anchor="middle" font-size="17" fill="#1B2029">0</text>
+<rect x="396" y="349" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="411" y="370" text-anchor="middle" font-size="17" fill="#1B2029">2</text>
+<rect x="426" y="349" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="441" y="370" text-anchor="middle" font-size="17" fill="#1B2029">0</text>
+<rect x="456" y="349" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="471" y="370" text-anchor="middle" font-size="17" fill="#1B2029">0</text>
+<rect x="486" y="349" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="501" y="370" text-anchor="middle" font-size="17" fill="#1B2029">0</text>
+<rect x="516" y="349" width="30" height="30" fill="#FFFFFF" stroke="#347E98" /><text x="531" y="370" text-anchor="middle" font-size="17" fill="#1B2029">0</text>
+</g><text x="396" y="402" font-size="12" fill="#454F61">Mapa de características: 3 × 5</text>
+<path d="M340 249 H376 V334 H392" fill="none" stroke="#C17626" stroke-width="2" />
+</g></svg>
