@@ -28,9 +28,50 @@ En la raíz de `posgrado/` están además la introducción a ciencia de datos e 
 
 ### pregrado
 
-Las diapositivas están en [`docs/pregrado/`](docs/pregrado/index.html): datos, reducción de
-dimensión (PCA, Kernel PCA, t-SNE, UMAP), conglomerados, panorama de regresión y
-clasificación con scikit-learn, redes neuronales y redes convolucionales.
+Presentación publicada: https://daprosero.github.io/Teoria-Aprendizaje-de-Maquina/pregrado/
+
+Las diapositivas están en [`docs/pregrado/`](docs/pregrado/index.html) (50 diapositivas):
+reducción de dimensión (PCA, Kernel PCA, t-SNE, UMAP), conglomerados, panorama de
+regresión y clasificación con scikit-learn, redes neuronales y redes convolucionales.
+
+El cierre de redes convolucionales tiene lecciones animadas propias (SVG + JavaScript,
+sin dependencias):
+
+| Diapositiva | Animación |
+|-------------|-----------|
+| 53 | Capa densa: entradas, pesos, suma y ReLU |
+| 54 | Densa frente a Conv2D: 1250 frente a 10 parámetros para 49 entradas y 25 salidas |
+| 55 | Un kernel 3 × 3 recorre la imagen y llena el mapa de características |
+| 56 | Banco de filtros: vertical, horizontal y uno redundante |
+| 57 | La convolución como el mismo `XW`: ventanas → filas de `X`, filtros → columnas de `W` |
+
+Controles: «Pausar/Reproducir» y «Paso siguiente». Con el foco en la animación, las
+flechas avanzan o retroceden un paso; fuera de ella, mueven las diapositivas. Con
+`prefers-reduced-motion` arranca en pausa.
+
+**Publicación.** `docs/` es la fuente del sitio. El flujo
+[`.github/workflows/pages.yml`](.github/workflows/pages.yml) lo despliega en GitHub Pages
+en cada push a `main` que toque `docs/**`.
+
+**Ver en local:**
+
+```bash
+python3 -m http.server 8011 --bind 127.0.0.1 --directory docs
+# abrir http://127.0.0.1:8011/pregrado/
+```
+
+**Pruebas:**
+
+```bash
+node --test tests/test_spatial.cjs tests/test_matrix.cjs
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
+```
+
+**Referencias.** [CS231n · Convolutional Networks](https://cs231n.github.io/convolutional-networks/),
+[vdumoulin/conv_arithmetic](https://github.com/vdumoulin/conv_arithmetic) y, como
+lectura opcional, [CNN Explainer](https://poloclub.github.io/cnn-explainer/). Se usaron solo
+como referencia conceptual: las animaciones son originales y no incluyen GIF ni
+recursos gráficos de terceros.
 
 ## Uso
 

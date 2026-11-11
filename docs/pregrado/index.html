@@ -15,6 +15,8 @@
     />
     <link rel="stylesheet" href="../assets/css/styles.css" />
     <link rel="stylesheet" href="dense-layer.css" />
+    <link rel="stylesheet" href="animations/spatial.css" />
+    <link rel="stylesheet" href="animations/matrix.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
@@ -3908,56 +3910,19 @@
               <p class="slide-kicker">54 · Densa frente a convolución</p>
               <h2>Una imagen no es solo una lista de valores</h2>
               <ul class="slide-list">
-                <li><strong>Mirá el trazo blanco:</strong> es la misma forma, pero se desplaza
-                  hacia la derecha. La animación compara ambas capas sobre los mismos píxeles.</li>
-                <li><strong>Densa:</strong> este detector tiene pesos 1 en tres posiciones
-                  de la izquierda y 0 en las demás. Al moverse el trazo, su respuesta cae de 3 a 0.
-                  Otra neurona podría aprender la nueva posición, pero no comparte esos pesos automáticamente.</li>
-                <li><strong>Convolución:</strong> el filtro 3 × 3 tiene unos en su columna central
-                  y ceros en las otras. Se reutiliza en cada ventana: la respuesta 3 se mueve
-                  en el mapa, sin aprender otro filtro.</li>
-                <li>Aplanar <strong>no borra los valores</strong>. Lo que falta en la densa es
-                  una estructura que aproveche la vecindad y comparta pesos entre posiciones.</li>
-                <li>Con 224 × 224 × 3 entradas y 128 neuronas: <strong>19 267 712 parámetros</strong>
-                  en una densa. Aquí mostramos un detector, <strong>no una clasificación completa</strong>:
-                  una CNN no es automáticamente invariante a desplazamientos.</li>
+                <li><strong>Densa:</strong> cada una de las 25 salidas mira los 49 píxeles
+                  con sus propios pesos. Fijate cómo cambia el mapa de pesos en cada posición.</li>
+                <li><strong>Convolución:</strong> un filtro 3 × 3 recorre la imagen y usa
+                  los <strong>mismos 9 pesos</strong> en las 25 posiciones.</li>
+                <li>Misma entrada (49) y misma salida (25):
+                  <strong>1250 parámetros</strong> en la densa frente a <strong>10</strong> en la convolución.</li>
+                <li>Aplanar <strong>no borra los valores</strong>, pero con 224 × 224 × 3 entradas
+                  y 128 neuronas la densa ya tiene 19 267 712 parámetros.</li>
               </ul>
+              <p><small>Referencia: <a href="https://cs231n.github.io/convolutional-networks/">CS231n · Convolutional Networks</a></small></p>
             </div>
-            <figure class="slide-figure dense-demo">
-              <label for="spatial-pause">Pausar comparación automática</label>
-              <input type="checkbox" id="spatial-pause" />
-              <label for="spatial-shift">Ver imagen desplazada (control manual)</label>
-              <input type="checkbox" id="spatial-shift" />
-              <svg class="spatial-comparison" viewBox="0 0 520 390" fill="none" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-labelledby="spatial-title spatial-desc">
-                <title id="spatial-title">Un mismo trazo, dos formas de usar los pesos</title>
-                <desc id="spatial-desc">Dos imágenes de 7 por 5 píxeles muestran un trazo vertical
-                  blanco sobre fondo oscuro. Se alternan su posición izquierda y derecha.
-                  Un detector denso fijo a la izquierda responde 3 y después 0.
-                  Un filtro convolucional compartido responde 3 en una nueva posición del mapa.
-                  Los demás píxeles valen cero; los blancos valen uno. Sin sesgo ni padding, paso uno.
-                  El mapa ilustrado es la fila central de la salida convolucional.</desc>
-                <rect width="520" height="390" rx="12" fill="#F4F7FA" />
-                <g fill="#1B2029" font-size="14" font-weight="700">
-                  <text x="40" y="30">DENSA</text><text x="300" y="30">CONVOLUCIÓN</text>
-                </g>
-                <g fill="#454F61" font-size="12">
-                  <text x="40" y="53">Pesos fijos por posición</text>
-                  <text x="300" y="53">Mismo filtro en cada ventana</text>
-                </g>
-                <g class="spatial-before">
-                  <g data-pixel-image="dense-1"><rect x="40" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="103" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="123" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="143" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="103" width="60" height="60" stroke="#A83A59" stroke-width="3" /></g><g data-pixel-image="conv-1"><rect x="300" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="103" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="123" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="143" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="103" width="60" height="60" stroke="#347E98" stroke-width="3" /></g><text x="40" y="222" font-size="18" font-weight="700" fill="#A83A59">Respuesta: 3</text><text x="300" y="222" font-size="18" font-weight="700" fill="#347E98">Respuesta: 3</text><rect x="300" y="238" width="28" height="28" fill="#347E98" stroke="#347E98" /><text x="314" y="257" text-anchor="middle" font-size="13" fill="#FFFFFF">3</text><rect x="328" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="342" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text><rect x="356" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="370" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text><rect x="384" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="398" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text><rect x="412" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="426" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text>
-                  <text x="40" y="294" font-size="14" fill="#1B2029">1. El trazo está a la izquierda.</text>
-                </g>
-                <g class="spatial-after">
-                  <g data-pixel-image="dense-4"><rect x="40" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="103" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="123" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="143" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="60" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="80" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="100" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="120" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="140" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="160" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="40" y="103" width="60" height="60" stroke="#A83A59" stroke-width="3" /></g><g data-pixel-image="conv-4"><rect x="300" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="83" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="103" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="103" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="123" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="123" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="143" width="20" height="20" fill="#FFFFFF" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="143" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="300" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="320" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="340" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="380" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="400" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="420" y="163" width="20" height="20" fill="#454F61" stroke="#AAB7C5" stroke-width="0.5" /><rect x="360" y="103" width="60" height="60" stroke="#347E98" stroke-width="3" /></g><text x="40" y="222" font-size="18" font-weight="700" fill="#A83A59">Respuesta: 0</text><text x="300" y="222" font-size="18" font-weight="700" fill="#347E98">Respuesta: 3</text><rect x="300" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="314" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text><rect x="328" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="342" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text><rect x="356" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="370" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text><rect x="384" y="238" width="28" height="28" fill="#347E98" stroke="#347E98" /><text x="398" y="257" text-anchor="middle" font-size="13" fill="#FFFFFF">3</text><rect x="412" y="238" width="28" height="28" fill="#FFFFFF" stroke="#347E98" /><text x="426" y="257" text-anchor="middle" font-size="13" fill="#454F61">0</text>
-                  <text x="40" y="294" font-size="14" fill="#1B2029">2. Misma forma, nueva posición.</text>
-                </g>
-                <text x="300" y="281" font-size="11" fill="#454F61">Mapa de respuesta · fila central</text>
-                <rect x="24" y="311" width="472" height="58" rx="10" fill="#FFFFFF" stroke="#347E98" stroke-width="2" />
-                <text x="40" y="335" font-size="14" font-weight="700" fill="#347E98">Mismos pesos, otra posición</text>
-                <text x="40" y="355" font-size="12" fill="#454F61">No es una clasificación completa: el mapa se desplaza.</text>
-              </svg>
+            <figure class="slide-figure">
+              <div data-spatial-lesson="comparison"></div>
             </figure>
           </article>
           <article class="slide" data-index="55" data-module="6" data-tone="yellow">
@@ -3965,21 +3930,54 @@
               <p class="slide-kicker">55 · Del detector al filtro</p>
               <h2>Un filtro es una pequeña matriz de pesos</h2>
               <ul class="slide-list">
-                <li><strong>La misma lógica de una neurona:</strong> multiplicar cada entrada
-                  por su peso, sumar y añadir un sesgo. Después puede aplicarse una activación.</li>
-                <li><strong>Ahora las entradas son una ventana de la imagen.</strong>
-                  Este filtro 3 × 3 mira nueve píxeles, no la imagen completa.</li>
-                <li>Los pesos resaltados dan importancia a una columna vertical.
-                  Cuando coincide con el trazo blanco, la suma vale <strong>3</strong>.</li>
-                <li><strong>Deslizar sin cambiar los pesos:</strong> cada posición produce un número.
-                  Al ordenarlos obtenemos un <strong>mapa de características</strong>.</li>
-                <li>Este filtro es ilustrativo: en una CNN, <strong>los pesos se aprenden</strong>.
-                  No tiene que suavizar la imagen como un filtro fotográfico; puede resaltar patrones.</li>
+                <li><strong>La misma lógica de una neurona:</strong> multiplicar cada píxel
+                  de la ventana por su peso y sumar.</li>
+                <li>La ventana 3 × 3 se desliza con paso 1; cada posición deja
+                  <strong>un número</strong> en el mapa de características.</li>
+                <li>Este kernel tiene unos en su columna central: responde más
+                  donde hay trazos verticales.</li>
+                <li>En una CNN <strong>los pesos se aprenden</strong>; aquí los fijamos para verlos.</li>
+              </ul>
+              <p><small>Referencia: <a href="https://github.com/vdumoulin/conv_arithmetic">vdumoulin/conv_arithmetic</a></small></p>
+            </div>
+            <figure class="slide-figure">
+              <div data-spatial-lesson="kernel"></div>
+            </figure>
+          </article>
+          <article class="slide" data-index="56" data-module="6" data-tone="yellow">
+            <div class="slide-content">
+              <p class="slide-kicker">56 · Banco de filtros</p>
+              <h2>Varios filtros, varias representaciones</h2>
+              <ul class="slide-list">
+                <li>Una capa convolucional usa <strong>varios filtros</strong> sobre la misma imagen;
+                  cada uno produce su propio mapa.</li>
+                <li>Aquí: un filtro vertical, uno horizontal y <strong>una copia del vertical</strong>.</li>
+                <li>El tercer mapa repite al primero: los filtros pueden ser
+                  <strong>redundantes</strong>. Nada obliga a que aprendan cosas distintas.</li>
+                <li>El entrenamiento ajusta los pesos según la tarea; estos kernels son
+                  <strong>ilustrativos</strong>, no entrenados.</li>
               </ul>
             </div>
             <figure class="slide-figure">
-              <img src="convolution-filter.svg"
-                alt="Imagen con un trazo vertical, ventana de nueve píxeles y filtro con unos en la columna central. Los productos se suman para dar 3, que se guarda en el mapa de características." />
+              <div data-spatial-lesson="filters"></div>
+            </figure>
+          </article>
+          <article class="slide" data-index="57" data-module="6" data-tone="yellow">
+            <div class="slide-content">
+              <p class="slide-kicker">57 · Convolución como matriz</p>
+              <h2>Al final, es el mismo XW</h2>
+              <ul class="slide-list">
+                <li>Cada fila de <strong>X_patches</strong> (9 × 9) es una de las 9 ventanas 3 × 3 aplanada:
+                  X son <strong>ventanas</strong>, no la imagen cruda. Las ventanas se solapan.</li>
+                <li>Cada columna de <strong>W</strong> (9 × 3) es un filtro aplanado: 9 pesos compartidos por todas las filas.</li>
+                <li><strong>Y = X_patches W</strong> (9 × 3). Cada columna de Y, reacomodada,
+                  forma uno de los tres <strong>mapas 3 × 3</strong>.</li>
+                <li>Es una forma de entender el cálculo (im2col); las bibliotecas pueden hacerlo sin copiar ventanas.</li>
+              </ul>
+              <p><small>Referencia: <a href="https://cs231n.github.io/convolutional-networks/">CS231n · Implementation as Matrix Multiplication</a></small></p>
+            </div>
+            <figure class="slide-figure">
+              <div data-matrix-lesson></div>
             </figure>
           </article>
         </main>
@@ -4005,7 +4003,7 @@
             <path d="M15 5 L8 12 L15 19" />
           </svg>
         </button>
-        <span id="counter">01 / 48</span>
+        <span id="counter">01 / 50</span>
         <button type="button" id="next" class="solid" aria-label="Slide siguiente" title="Siguiente">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M9 5 L16 12 L9 19" />
@@ -4014,5 +4012,7 @@
       </footer>
     </div>
     <script src="../assets/js/app.js"></script>
+    <script src="animations/spatial.js"></script>
+    <script src="animations/matrix.js"></script>
   </body>
 </html>
