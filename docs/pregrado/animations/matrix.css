@@ -1,0 +1,5 @@
+/* Matrix (im2col) lesson; builds on spatial.css, which must be loaded first. */
+.matrix-lesson .spatial-label {
+  /* Stage labels list a full 9-value row, so reserve three lines to avoid layout jumps. */
+  min-height: 3.9em;
+}
