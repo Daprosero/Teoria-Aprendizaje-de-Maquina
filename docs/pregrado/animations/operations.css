@@ -1,0 +1,5 @@
+/* Stride, padding and pooling lessons; build on spatial.css, which must be loaded first. */
+.operation-lesson .spatial-label {
+  /* Labels describe two windows or a full sum, so reserve three lines to avoid layout jumps. */
+  min-height: 3.9em;
+}
