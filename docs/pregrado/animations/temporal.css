@@ -1,0 +1,45 @@
+/* Time-series lessons; build on spatial.css, which must be loaded first. */
+.temporal-lesson .spatial-label {
+  /* Labels carry a formula or a count summary, so reserve three lines to avoid layout jumps. */
+  min-height: 3.9em;
+}
+
+.temporal-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  font-size: 0.8rem;
+  color: #1b2029;
+}
+
+.temporal-option-label {
+  font-weight: 600;
+}
+
+.temporal-option-value {
+  min-width: 3.2em;
+  font-variant-numeric: tabular-nums;
+}
+
+.temporal-options .spatial-button[aria-pressed="true"] {
+  background: #347e98;
+  color: #ffffff;
+}
+
+.temporal-options .spatial-button:disabled {
+  border-color: #c9d2dc;
+  color: #5b6472;
+  background: #ffffff;
+  cursor: not-allowed;
+}
+
+.temporal-range {
+  width: 7.5em;
+  accent-color: #a83a59;
+}
+
+.temporal-range:focus-visible {
+  outline: 2px solid #a83a59;
+  outline-offset: 2px;
+}
