@@ -1,0 +1,5 @@
+/* Dropout and end-to-end CNN lessons; build on spatial.css, which must be loaded first. */
+.regularization-lesson .spatial-label {
+  /* Labels carry a full pass or a whole stage, so reserve three lines to avoid layout jumps. */
+  min-height: 3.9em;
+}
