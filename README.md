@@ -30,9 +30,10 @@ En la raíz de `posgrado/` están además la introducción a ciencia de datos e 
 
 Presentación publicada: https://daprosero.github.io/Teoria-Aprendizaje-de-Maquina/pregrado/
 
-Las diapositivas están en [`docs/pregrado/`](docs/pregrado/index.html) (56 diapositivas):
+Las diapositivas están en [`docs/pregrado/`](docs/pregrado/index.html) (63 diapositivas):
 reducción de dimensión (PCA, Kernel PCA, t-SNE, UMAP), conglomerados, panorama de
-regresión y clasificación con scikit-learn, redes neuronales y redes convolucionales.
+regresión y clasificación con scikit-learn, redes neuronales, redes convolucionales y
+series de tiempo.
 
 El cierre de redes convolucionales tiene lecciones animadas propias (SVG + JavaScript,
 sin dependencias):
@@ -51,14 +52,31 @@ sin dependencias):
 | 62 | Dropout: máscaras distintas en entrenamiento (p = 0.5, reescala por 0.5); en inferencia no se apaga nada |
 | 63 | Recorrido completo: 6 × 6 → conv 4 × 4 × 2 → ReLU → pooling 2 × 2 × 2 → 8 → dos puntajes |
 
-Controles: «Pausar/Reproducir» y «Paso siguiente». Con el foco en la animación, las
+El módulo de series de tiempo pasa de los vecinos espaciales de una imagen a los vecinos
+temporales de una señal sintética de 100 muestras, y distingue la **validación** (ámbar,
+para elegir modelos) del **test final** (rosa, `t = 80..99` en los esquemas temporales),
+que queda fuera de todos los pliegues:
+
+| Diapositiva | Animación |
+|-------------|-----------|
+| 64 | Señal en el tiempo: tendencia, ciclo de unos 20 pasos y ruido |
+| 65 | AR(3): predice con tres rezagos estrictamente pasados y revela el valor observado después; coeficientes ilustrativos |
+| 66 | División train/test interactiva: aleatoria (IID) o cronológica, test del 10 % al 40 % y nueva semilla |
+| 67 | K-fold ordinario con el test final apartado antes de los 5 pliegues |
+| 68 | Fuga temporal: en un pliegue aleatorio se entrena con `t = 27` y se valida `t = 26` |
+| 69 | Ventana creciente: train `0..29`, `0..39`, …, `0..69` y 10 pasos de validación |
+| 70 | Ventana deslizante: train de ancho fijo 30, la historia vieja se descarta, mismo horizonte |
+
+Controles: «Pausar/Reproducir» y «Paso siguiente». En la diapositiva 66, los botones
+«aleatoria/cronológica», el control deslizante y «Nueva semilla» redibujan la partición real. Con el foco en la animación, las
 flechas avanzan o retroceden un paso; fuera de ella, mueven las diapositivas. Con
 `prefers-reduced-motion` arranca en pausa.
 
 **Publicación.** `docs/` es la fuente del sitio. El flujo
 [`.github/workflows/pages.yml`](.github/workflows/pages.yml) lo despliega en GitHub Pages
 en cada push a `main` que toque `docs/**`; la versión publicada refleja lo que ya está
-en `main`, así que las diapositivas nuevas aparecen allí solo después de integrarlas.
+en `main`, así que las diapositivas nuevas (por ejemplo, el módulo de series de tiempo)
+aparecen allí solo después de integrarlas y hacer push a `main`.
 
 **Ver en local:**
 
@@ -78,7 +96,10 @@ PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
 [vdumoulin/conv_arithmetic](https://github.com/vdumoulin/conv_arithmetic) y, como
 lectura opcional, [CNN Explainer](https://poloclub.github.io/cnn-explainer/). Se usaron solo
 como referencia conceptual: las animaciones son originales y no incluyen GIF ni
-recursos gráficos de terceros.
+recursos gráficos de terceros. Para series de tiempo:
+[scikit-learn · `TimeSeriesSplit`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)
+y [FPP3 · validación cruzada en series de tiempo](https://otexts.com/fpp3/tscv.html); los
+pliegues se calculan con funciones propias en JavaScript, no con scikit-learn.
 
 ## Uso
 

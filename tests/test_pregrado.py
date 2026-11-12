@@ -35,17 +35,20 @@ class UndergraduateDeckTests(unittest.TestCase):
     def test_removed_module_and_reachable_remaining_modules(self):
         self.assertNotIn('Datos: de crudos a utilizables', self.text)
         self.assertFalse(any(s['data-module'] == '1' for s in self.deck.slides))
-        self.assertEqual(len(self.deck.slides), 56)
-        self.assertIn('01 / 56', self.text)
+        self.assertEqual(len(self.deck.slides), 63)
+        self.assertIn('01 / 63', self.text)
+        self.assertNotIn('01 / 56', self.text)
         self.assertNotIn('01 / 50', self.text)
-        for position, module in zip(self.deck.links, ['2', '3', '4', '5', '6']):
+        self.assertEqual(self.deck.links, [1, 7, 13, 16, 36, 56])
+        for position, module in zip(self.deck.links, ['2', '3', '4', '5', '6', '7']):
             self.assertEqual(self.deck.slides[position]['data-module'], module)
             self.assertNotEqual(self.deck.slides[position - 1]['data-module'], module)
 
     def test_original_cutoff_and_added_slides(self):
         self.assertEqual([int(s['data-index']) for s in self.deck.slides],
-                         [0] + list(range(9, 64)))
-        self.assertTrue(all(s['data-module'] == '6' for s in self.deck.slides[-6:]))
+                         [0] + list(range(9, 71)))
+        self.assertTrue(all(s['data-module'] == '6' for s in self.deck.slides[50:56]))
+        self.assertTrue(all(s['data-module'] == '7' for s in self.deck.slides[56:]))
         self.assertIn('¿Qué pasa si usamos una red densa?', self.text)
         self.assertIn('Una capa densa combina toda la entrada', self.text)
         self.assertIn('Una imagen no es solo una lista de valores', self.text)
@@ -128,13 +131,73 @@ class UndergraduateDeckTests(unittest.TestCase):
         head = self.text.split('</head>', 1)[0]
         css = [head.index(f'href="{name}"') for name in
                ['dense-layer.css', 'animations/spatial.css', 'animations/matrix.css',
-                'animations/operations.css', 'animations/regularization.css']]
+                'animations/operations.css', 'animations/regularization.css',
+                'animations/temporal.css', 'animations/validation.css']]
         self.assertEqual(css, sorted(css))
         scripts = re.findall(r'<script\b[^>]*\bsrc="([^"]+)"', self.text)
         local = [s for s in scripts if not s.startswith('http')]
         self.assertEqual(local, ['../assets/js/app.js', 'animations/spatial.js',
                                  'animations/matrix.js', 'animations/operations.js',
-                                 'animations/regularization.js'])
+                                 'animations/regularization.js', 'animations/temporal.js',
+                                 'animations/validation.js'])
+
+    def test_time_series_rail_module(self):
+        nav = self.text.split('<nav class="rail"', 1)[1].split('</nav>', 1)[0]
+        block = nav.split('<div class="rail-module" data-module="7">', 1)[1]
+        self.assertIn('data-first="56"', block)
+        self.assertIn('6. Series de tiempo', block)
+        self.assertIn('id="dots-7"', block)
+        self.assertEqual(self.text.count('id="dots-7"'), 1)
+        self.assertEqual(int(self.deck.slides[56]['data-index']), 64)
+        self.assertEqual(self.deck.slides[56]['data-module'], '7')
+
+    def test_time_series_slides_each_mount_one_animated_lesson(self):
+        mounts = {64: 'data-temporal-lesson="signal"',
+                  65: 'data-temporal-lesson="autoregression"',
+                  66: 'data-temporal-lesson="split"',
+                  67: 'data-validation-lesson="folds"',
+                  68: 'data-validation-lesson="leakage"',
+                  69: 'data-validation-lesson="expanding"',
+                  70: 'data-validation-lesson="sliding"'}
+        for index, mount in mounts.items():
+            slide = self.slide(index)
+            self.assertEqual(self.text.count(mount), 1, mount)
+            figure = slide.split('<figure class="slide-figure', 1)[1].split('</figure>', 1)[0]
+            self.assertIn(mount, figure)
+            self.assertNotIn('<img', figure)
+            self.assertNotIn('<svg', figure)
+            self.assertEqual(slide.count('<li>'), slide.count('</li>'))
+            self.assertTrue(3 <= slide.count('<li>') <= 4, index)
+
+    def test_time_series_copy_states_past_only_and_final_holdout(self):
+        signal = self.slide(64)
+        for fragment in ['100', 'tendencia', 'sintética', 'vecin']:
+            self.assertIn(fragment, signal.lower())
+        ar = self.slide(65)
+        for fragment in ['y(t−1)', 'y(t−2)', 'y(t−3)', 'ilustrativos', 'no entrenados',
+                         'solo valores anteriores']:
+            self.assertIn(fragment, ar)
+        split = self.slide(66)
+        for fragment in ['10 %', '40 %', 'semilla', 'aleatoria', 'cronológica',
+                         'no garantiza']:
+            self.assertIn(fragment, split)
+        folds = self.slide(67)
+        for fragment in ['test final', 'validación', 'nunca entra']:
+            self.assertIn(fragment, folds)
+        leakage = self.slide(68)
+        for fragment in ['t = 26', 't = 27', 'futuro', 'no prueba']:
+            self.assertIn(fragment, leakage)
+        expanding = self.slide(69)
+        for fragment in ['0..29', '0..69', 'crece', '10 pasos', '80..99', 'solo pasado',
+                         'solo con el train de cada pliegue']:
+            self.assertIn(fragment, expanding)
+        sliding = self.slide(70)
+        for fragment in ['ancho fijo 30', 'se descarta', '10 pasos', '80..99',
+                         'cada pliegue']:
+            self.assertIn(fragment, sliding)
+        self.assertIn('scikit-learn.org/stable/modules/generated/'
+                      'sklearn.model_selection.TimeSeriesSplit.html', self.text)
+        self.assertIn('otexts.com/fpp3/tscv.html', self.text)
 
     def test_local_asset_references_resolve(self):
         refs = re.findall(r'<(?:img|script|link|image)\b[^>]*?\b(?:src|href)="([^"]+)"',

@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="animations/matrix.css" />
     <link rel="stylesheet" href="animations/operations.css" />
     <link rel="stylesheet" href="animations/regularization.css" />
+    <link rel="stylesheet" href="animations/temporal.css" />
+    <link rel="stylesheet" href="animations/validation.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
@@ -71,6 +73,12 @@
             5. Redes convolucionales
           </button>
           <div class="rail-dots" id="dots-6"></div>
+        </div>
+        <div class="rail-module" data-module="7">
+          <button class="rail-title" data-first="56">
+            6. Series de tiempo
+          </button>
+          <div class="rail-dots" id="dots-7"></div>
         </div>
       </nav>
 
@@ -4077,6 +4085,111 @@
               <div data-regularization-lesson="pipeline"></div>
             </figure>
           </article>
+          <article class="slide" data-index="64" data-module="7" data-tone="cyan">
+            <div class="slide-content">
+              <p class="slide-kicker">64 · Señal en el tiempo</p>
+              <h2>De vecinos en el espacio a vecinos en el tiempo</h2>
+              <ul class="slide-list">
+                <li>En una imagen, cada píxel se entiende con sus vecinos de al lado; en una serie, con los <strong>instantes anteriores</strong>.</li>
+                <li>Una señal sintética de <strong>100</strong> muestras (t = 0..99): tendencia que sube, un ciclo de unos 20 pasos y ruido.</li>
+                <li>El orden es parte del dato: si se barajan las muestras, la señal deja de ser la misma.</li>
+              </ul>
+            </div>
+            <figure class="slide-figure">
+              <div data-temporal-lesson="signal"></div>
+            </figure>
+          </article>
+          <article class="slide" data-index="65" data-module="7" data-tone="cyan">
+            <div class="slide-content">
+              <p class="slide-kicker">65 · Modelo autorregresivo</p>
+              <h2>La serie se predice con su propio pasado</h2>
+              <ul class="slide-list">
+                <li>AR(3): ŷ(t) = 0.6·y(t−1) + 0.25·y(t−2) + 0.1·y(t−3). Las entradas son los tres rezagos más recientes.</li>
+                <li>Para predecir en t se usan solo valores anteriores a t; el futuro no se dibuja todavía.</li>
+                <li>Primero se calcula ŷ(t); recién después se revela el valor observado y(t) y el error.</li>
+                <li>Coeficientes ilustrativos, no entrenados: el error mostrado no mide la calidad de ningún ajuste.</li>
+              </ul>
+            </div>
+            <figure class="slide-figure">
+              <div data-temporal-lesson="autoregression"></div>
+            </figure>
+          </article>
+          <article class="slide" data-index="66" data-module="7" data-tone="cyan">
+            <div class="slide-content">
+              <p class="slide-kicker">66 · División train/test</p>
+              <h2>Aleatoria o cronológica</h2>
+              <ul class="slide-list">
+                <li>Con los controles se elige la división <strong>aleatoria</strong> (IID) frente a <strong>cronológica</strong>, con test entre 10 % y 40 % y una nueva semilla.</li>
+                <li>Aleatoria: train (azul) y test (rosa) cubren todo el eje y suelen conservar la misma forma general.</li>
+                <li>Que tengan la misma forma es un ejemplo, no garantiza que el modelo pronostique el futuro.</li>
+                <li>Cronológica: el test es el último bloque, después de todo el train, como al pronosticar.</li>
+              </ul>
+            </div>
+            <figure class="slide-figure">
+              <div data-temporal-lesson="split"></div>
+            </figure>
+          </article>
+          <article class="slide" data-index="67" data-module="7" data-tone="yellow">
+            <div class="slide-content">
+              <p class="slide-kicker">67 · K-fold ordinario</p>
+              <h2>Validar sin tocar el test final</h2>
+              <ul class="slide-list">
+                <li>Primero se aparta el <strong>test final</strong> (rosa, con candado): 20 de las 100 muestras.</li>
+                <li>Las 80 restantes se reparten en 5 pliegues: la validación (ámbar) cambia en cada uno y el train (azul) es el resto.</li>
+                <li>La validación sirve para elegir modelos; no es el test final, que nunca entra en ningún pliegue.</li>
+                <li>Es la línea base IID: supone que el orden de las muestras no importa.</li>
+              </ul>
+            </div>
+            <figure class="slide-figure">
+              <div data-validation-lesson="folds"></div>
+            </figure>
+          </article>
+          <article class="slide" data-index="68" data-module="7" data-tone="yellow">
+            <div class="slide-content">
+              <p class="slide-kicker">68 · Fuga temporal</p>
+              <h2>Por qué no barajar al pronosticar</h2>
+              <ul class="slide-list">
+                <li>En un pliegue aleatorio, el train incluye t = 27 mientras se valida t = 26: el modelo ya vio el futuro.</li>
+                <li>Train y validación conservan la misma forma de onda, pero eso no prueba que se pronostique bien.</li>
+                <li>Al pronosticar una señal con autocorrelación no se cumple la suposición IID: hay que validar con el pasado.</li>
+                <li>No es una regla para todo dato con fecha: depende de la tarea y de la dependencia entre muestras.</li>
+              </ul>
+            </div>
+            <figure class="slide-figure">
+              <div data-validation-lesson="leakage"></div>
+            </figure>
+          </article>
+          <article class="slide" data-index="69" data-module="7" data-tone="yellow">
+            <div class="slide-content">
+              <p class="slide-kicker">69 · Ventana creciente</p>
+              <h2>Validación cruzada en series de tiempo</h2>
+              <ul class="slide-list">
+                <li>Cada pliegue entrena con solo pasado y valida los <strong>10 pasos</strong> siguientes.</li>
+                <li>El train crece: 0..29, 0..39, … hasta 0..69; el origen avanza de a 10.</li>
+                <li>El test final 80..99 queda siempre fuera de todos los pliegues.</li>
+                <li>Escalado y preprocesamiento se ajustan solo con el train de cada pliegue, no con la serie completa.</li>
+              </ul>
+              <p><small>Referencias: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html">scikit-learn · TimeSeriesSplit</a> · <a href="https://otexts.com/fpp3/tscv.html">FPP3 · Time series cross-validation</a></small></p>
+            </div>
+            <figure class="slide-figure">
+              <div data-validation-lesson="expanding"></div>
+            </figure>
+          </article>
+          <article class="slide" data-index="70" data-module="7" data-tone="yellow">
+            <div class="slide-content">
+              <p class="slide-kicker">70 · Ventana deslizante</p>
+              <h2>Historia de tamaño fijo</h2>
+              <ul class="slide-list">
+                <li>El train tiene <strong>ancho fijo 30</strong>: 0..29, 10..39, … hasta 40..69. La historia más vieja se descarta (gris claro).</li>
+                <li>Mismo horizonte que la ventana creciente: en cada pliegue se validan los 10 pasos siguientes.</li>
+                <li>El test final 80..99 sigue fuera; solo cambia cuánta historia usa el modelo.</li>
+                <li>Útil cuando el pasado lejano ya no se parece al presente. En scikit-learn es una variante (max_train_size), no el valor por defecto.</li>
+              </ul>
+            </div>
+            <figure class="slide-figure">
+              <div data-validation-lesson="sliding"></div>
+            </figure>
+          </article>
         </main>
       </div>
 
@@ -4100,7 +4213,7 @@
             <path d="M15 5 L8 12 L15 19" />
           </svg>
         </button>
-        <span id="counter">01 / 56</span>
+        <span id="counter">01 / 63</span>
         <button type="button" id="next" class="solid" aria-label="Slide siguiente" title="Siguiente">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M9 5 L16 12 L9 19" />
@@ -4113,5 +4226,7 @@
     <script src="animations/matrix.js"></script>
     <script src="animations/operations.js"></script>
     <script src="animations/regularization.js"></script>
+    <script src="animations/temporal.js"></script>
+    <script src="animations/validation.js"></script>
   </body>
 </html>
