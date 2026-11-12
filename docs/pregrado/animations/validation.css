@@ -1,0 +1,5 @@
+/* Validation lessons; build on spatial.css, which must be loaded first. */
+.validation-lesson .spatial-label {
+  /* Labels carry fold ranges and counts, so reserve three lines to avoid layout jumps. */
+  min-height: 3.9em;
+}
