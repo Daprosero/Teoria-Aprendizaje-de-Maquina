@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="dense-layer.css" />
     <link rel="stylesheet" href="animations/spatial.css" />
     <link rel="stylesheet" href="animations/matrix.css" />
+    <link rel="stylesheet" href="animations/operations.css" />
+    <link rel="stylesheet" href="animations/regularization.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
@@ -3980,6 +3982,101 @@
               <div data-matrix-lesson></div>
             </figure>
           </article>
+          <article class="slide" data-index="58" data-module="6" data-tone="yellow">
+            <div class="slide-content">
+              <p class="slide-kicker">58 · Paso (stride)</p>
+              <h2>Cuánto avanza la ventana</h2>
+              <ul class="slide-list">
+                <li>La misma casa 5 × 5 y el mismo kernel 3 × 3, con dos pasos distintos.</li>
+                <li>Con <strong>paso 1</strong> la ventana avanza un píxel: 9 posiciones, mapa <strong>3 × 3</strong>.</li>
+                <li>Con <strong>paso 2</strong> salta dos: solo 4 posiciones, mapa <strong>2 × 2</strong>.</li>
+                <li>Tamaño de salida: (5 − 3) / paso + 1. Un paso mayor resume más rápido la imagen.</li>
+              </ul>
+              <p><small>Referencia: <a href="https://github.com/vdumoulin/conv_arithmetic">vdumoulin/conv_arithmetic</a></small></p>
+            </div>
+            <figure class="slide-figure">
+              <div data-operation-lesson="stride"></div>
+            </figure>
+          </article>
+          <article class="slide" data-index="59" data-module="6" data-tone="yellow">
+            <div class="slide-content">
+              <p class="slide-kicker">59 · Relleno (padding)</p>
+              <h2>Qué pasa en los bordes</h2>
+              <ul class="slide-list">
+                <li>Con <strong>relleno 0</strong>, kernel 3 × 3 y paso 1, la casa 5 × 5 se achica a un mapa <strong>3 × 3</strong>.</li>
+                <li>Con <strong>relleno 1</strong> agregamos un borde de ceros: 25 posiciones y el mapa conserva <strong>5 × 5</strong>.</li>
+                <li>Así la ventana también se centra sobre los píxeles del borde.</li>
+                <li>Los ceros <strong>no agregan información</strong> nueva de la imagen: el centro 3 × 3 coincide con el mapa sin relleno.</li>
+              </ul>
+              <p><small>Referencia: <a href="https://github.com/vdumoulin/conv_arithmetic">vdumoulin/conv_arithmetic</a></small></p>
+            </div>
+            <figure class="slide-figure">
+              <div data-operation-lesson="padding"></div>
+            </figure>
+          </article>
+          <article class="slide" data-index="60" data-module="6" data-tone="yellow">
+            <div class="slide-content">
+              <p class="slide-kicker">60 · Max pooling</p>
+              <h2>Conservar la respuesta más fuerte</h2>
+              <ul class="slide-list">
+                <li>Un mapa de activación 4 × 4, ventana <strong>2 × 2</strong> con <strong>paso 2</strong>: salida 2 × 2.</li>
+                <li>Cada ventana ilumina sus cuatro valores y lleva <strong>el mayor</strong> a la salida.</li>
+                <li>La pregunta es: «¿apareció una señal fuerte en esta región?».</li>
+                <li>Es una operación fija, <strong>sin pesos</strong> que aprender.</li>
+              </ul>
+              <p><small>Referencia: <a href="https://cs231n.github.io/convolutional-networks/">CS231n · Convolutional Networks</a></small></p>
+            </div>
+            <figure class="slide-figure">
+              <div data-operation-lesson="maxpool"></div>
+            </figure>
+          </article>
+          <article class="slide" data-index="61" data-module="6" data-tone="yellow">
+            <div class="slide-content">
+              <p class="slide-kicker">61 · Average pooling</p>
+              <h2>Resumir la respuesta de la región</h2>
+              <ul class="slide-list">
+                <li>La misma entrada 4 × 4, ventana 2 × 2 y paso 2: salida 2 × 2, pero <strong>promediando</strong> los cuatro valores.</li>
+                <li>Al lado queda el resultado de max pooling para comparar región por región.</li>
+                <li>Max conserva el pico (9); el promedio lo diluye (3.75). En una región pareja dan lo mismo.</li>
+                <li>Tampoco tiene parámetros: también es <strong>sin pesos</strong>.</li>
+              </ul>
+              <p><small>Referencia: <a href="https://cs231n.github.io/convolutional-networks/">CS231n · Convolutional Networks</a></small></p>
+            </div>
+            <figure class="slide-figure">
+              <div data-operation-lesson="averagepool"></div>
+            </figure>
+          </article>
+          <article class="slide" data-index="62" data-module="6" data-tone="yellow">
+            <div class="slide-content">
+              <p class="slide-kicker">62 · Dropout</p>
+              <h2>No depender siempre de las mismas conexiones</h2>
+              <ul class="slide-list">
+                <li>En <strong>entrenamiento</strong>, con p = 0.5, cada pasada usa una <strong>máscara</strong> distinta y apaga otras activaciones.</li>
+                <li>Las que siguen se dividen por 0.5 (valen el doble) para conservar la escala esperada.</li>
+                <li>En <strong>inferencia</strong> no se apaga nada: todos los valores pasan sin reescalar.</li>
+                <li><strong>No elimina neuronas</strong> para siempre y no achica el mapa como pooling: siguen siendo 6 valores.</li>
+              </ul>
+              <p><small>Referencia: <a href="https://jmlr.org/papers/v15/srivastava14a.html">Srivastava et al., 2014</a></small></p>
+            </div>
+            <figure class="slide-figure">
+              <div data-regularization-lesson="dropout"></div>
+            </figure>
+          </article>
+          <article class="slide" data-index="63" data-module="6" data-tone="yellow">
+            <div class="slide-content">
+              <p class="slide-kicker">63 · Recorrido completo</p>
+              <h2>De la imagen a la clasificación</h2>
+              <ul class="slide-list">
+                <li>Lienzo <strong>6 × 6</strong>: la casa con una fila y una columna de ceros extra, para que la geometría cierre justa.</li>
+                <li>Dos filtros 3 × 3 → mapas <strong>4 × 4 × 2</strong>; ReLU deja la forma 4 × 4 × 2 y pasa los negativos a 0.</li>
+                <li>Max pooling 2 × 2 → <strong>2 × 2 × 2</strong>; aplanar → 8 valores; una densa da dos puntajes crudos: <strong>6</strong> y <strong>3</strong>.</li>
+                <li>Parámetros ilustrativos, no entrenados: los puntajes no son probabilidades. Paso y relleno cambiarían estas formas; aquí no hace falta relleno 1. Dropout no se aplica en inferencia.</li>
+              </ul>
+            </div>
+            <figure class="slide-figure">
+              <div data-regularization-lesson="pipeline"></div>
+            </figure>
+          </article>
         </main>
       </div>
 
@@ -4003,7 +4100,7 @@
             <path d="M15 5 L8 12 L15 19" />
           </svg>
         </button>
-        <span id="counter">01 / 50</span>
+        <span id="counter">01 / 56</span>
         <button type="button" id="next" class="solid" aria-label="Slide siguiente" title="Siguiente">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M9 5 L16 12 L9 19" />
@@ -4014,5 +4111,7 @@
     <script src="../assets/js/app.js"></script>
     <script src="animations/spatial.js"></script>
     <script src="animations/matrix.js"></script>
+    <script src="animations/operations.js"></script>
+    <script src="animations/regularization.js"></script>
   </body>
 </html>

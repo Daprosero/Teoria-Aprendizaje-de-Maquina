@@ -30,7 +30,7 @@ En la raíz de `posgrado/` están además la introducción a ciencia de datos e 
 
 Presentación publicada: https://daprosero.github.io/Teoria-Aprendizaje-de-Maquina/pregrado/
 
-Las diapositivas están en [`docs/pregrado/`](docs/pregrado/index.html) (50 diapositivas):
+Las diapositivas están en [`docs/pregrado/`](docs/pregrado/index.html) (56 diapositivas):
 reducción de dimensión (PCA, Kernel PCA, t-SNE, UMAP), conglomerados, panorama de
 regresión y clasificación con scikit-learn, redes neuronales y redes convolucionales.
 
@@ -44,6 +44,12 @@ sin dependencias):
 | 55 | Un kernel 3 × 3 recorre la imagen y llena el mapa de características |
 | 56 | Banco de filtros: vertical, horizontal y uno redundante |
 | 57 | La convolución como el mismo `XW`: ventanas → filas de `X`, filtros → columnas de `W` |
+| 58 | Paso (stride): kernel 3 × 3 sobre 5 × 5 con paso 1 (mapa 3 × 3) y paso 2 (mapa 2 × 2) |
+| 59 | Relleno (padding): sin relleno el mapa se achica a 3 × 3; con relleno 1 de ceros conserva 5 × 5 |
+| 60 | Max pooling 2 × 2, paso 2: de 4 × 4 a 2 × 2 conservando el mayor, sin pesos |
+| 61 | Average pooling sobre la misma entrada, comparado con max pooling |
+| 62 | Dropout: máscaras distintas en entrenamiento (p = 0.5, reescala por 0.5); en inferencia no se apaga nada |
+| 63 | Recorrido completo: 6 × 6 → conv 4 × 4 × 2 → ReLU → pooling 2 × 2 × 2 → 8 → dos puntajes |
 
 Controles: «Pausar/Reproducir» y «Paso siguiente». Con el foco en la animación, las
 flechas avanzan o retroceden un paso; fuera de ella, mueven las diapositivas. Con
@@ -51,7 +57,8 @@ flechas avanzan o retroceden un paso; fuera de ella, mueven las diapositivas. Co
 
 **Publicación.** `docs/` es la fuente del sitio. El flujo
 [`.github/workflows/pages.yml`](.github/workflows/pages.yml) lo despliega en GitHub Pages
-en cada push a `main` que toque `docs/**`.
+en cada push a `main` que toque `docs/**`; la versión publicada refleja lo que ya está
+en `main`, así que las diapositivas nuevas aparecen allí solo después de integrarlas.
 
 **Ver en local:**
 
@@ -63,7 +70,7 @@ python3 -m http.server 8011 --bind 127.0.0.1 --directory docs
 **Pruebas:**
 
 ```bash
-node --test tests/test_spatial.cjs tests/test_matrix.cjs
+node --test tests/test_*.cjs
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
 ```
 
